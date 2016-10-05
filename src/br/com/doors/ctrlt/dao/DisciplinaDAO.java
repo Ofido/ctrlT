@@ -40,12 +40,12 @@ public class DisciplinaDAO implements InterfaceDisciplinaDAO {
 			throw new RuntimeException("DISCIPLINA NÃO PODE SER NULA" + this.getClass());
 		}
 		try {
-			PreparedStatement stmt = CONEXAO.prepareStatement(INCLUIR);
+			PreparedStatement stmt = CONEXAO.prepareStatement(INCLUIR, PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, t.getNomeDisciplina());
-			
+			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if(rs.next()){
-				t.setIdDisciplina(rs.getLong("idDisciplina"));
+				t.setIdDisciplina(rs.getLong(1));
 			}
 			rs.close();
 			stmt.close();
@@ -64,8 +64,7 @@ public class DisciplinaDAO implements InterfaceDisciplinaDAO {
 			stmt.setLong(2, t.getIdDisciplina());
 			stmt.setString(1, t.getNomeDisciplina());
 			
-			ResultSet rs = stmt.executeQuery();
-			rs.close();
+			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException("ERRO NA ALTERACAO DE DISCIPLINA" + this.getClass() + e.toString());
@@ -81,8 +80,7 @@ public class DisciplinaDAO implements InterfaceDisciplinaDAO {
 			PreparedStatement stmt = CONEXAO.prepareStatement(EXCLUIR);
 			stmt.setLong(1, id);
 			
-			ResultSet rs = stmt.executeQuery();
-			rs.close();
+			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException("ERRO NA EXCLUSAO DE DISCIPLINA" + this.getClass() + e.toString());

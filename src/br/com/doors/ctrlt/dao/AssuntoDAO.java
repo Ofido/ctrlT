@@ -10,15 +10,18 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import br.com.doors.ctrlt.model.Assunto;
+import br.com.doors.ctrlt.model.Disciplina;
 
+@Repository
 public class AssuntoDAO implements InterfaceAssuntoDAO {
 	private static final String INCLUIR = "insert into ctrlt.assunto(idDisciplina, nomeAssunto) value (?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.assunto where idAssunto=?";
 	private static final String ALTERAR = "update ctrlt.assunto set idDisciplina=?, nomeAssunto=? where idAssunto=?";
-	private static final String LISTAR = "select * from ctrlt.assunto";
-	private static final String PROCURAR = "select * from ctrlt.assunto where idassunto=?";
+	private static final String LISTAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina";
+	private static final String PROCURAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina and idassunto=?";
 
 	// CONEXÃO
 	private static Connection CONEXAO;
@@ -33,18 +36,18 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	}
 
 	@Override
-	public void incluir(br.com.doors.ctrlt.model.Assunto t) {
+	public void incluir(Assunto t) {
 		if (t==null) {
 			throw new RuntimeException("ASSUNTO NÃO PODE SER NULO" + this.getClass());
 		}
 		try {
-			PreparedStatement stmt = CONEXAO.prepareStatement(INCLUIR);
+			PreparedStatement stmt = CONEXAO.prepareStatement(INCLUIR, PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setLong(1, t.getDisciplinaAssunto().getIdDisciplina());
 			stmt.setString(2, t.getNomeAssunto());
-			
+			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if(rs.next()){
-				t.setIdAssunto(rs.getLong("idAssunto"));
+				t.setIdAssunto(rs.getLong(1));
 			}
 			rs.close();
 			stmt.close();
@@ -54,7 +57,7 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	}
 
 	@Override
-	public void alterar(br.com.doors.ctrlt.model.Assunto t) {
+	public void alterar(Assunto t) {
 		if (t==null) {
 			throw new RuntimeException("ASSUNTO NÃO PODE SER NULO" + this.getClass());
 		}
@@ -62,6 +65,7 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 			PreparedStatement stmt = CONEXAO.prepareStatement(ALTERAR);
 			stmt.setLong(1, t.getDisciplinaAssunto().getIdDisciplina());
 			stmt.setString(2, t.getNomeAssunto());
+			stmt.setLong(3, t.getIdAssunto());
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {
@@ -86,12 +90,12 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	}
 
 	@Override
-	public void excluir(br.com.doors.ctrlt.model.Assunto t) {
+	public void excluir(Assunto t) {
 		excluir(t.getIdAssunto());
 	}
 
 	@Override
-	public br.com.doors.ctrlt.model.Assunto procurar(Long id) {
+	public Assunto procurar(Long id) {
 		Assunto assunto = null;
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(PROCURAR);
@@ -101,9 +105,13 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
+				Disciplina disciplina = new Disciplina();
+				disciplina.setIdDisciplina(rs.getLong("idDisciplina"));
+				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
 				assunto = new Assunto();
 				assunto.setIdAssunto(rs.getLong("idassunto"));
 				assunto.setNomeAssunto(rs.getString("nomeassunto"));
+				assunto.setDisciplinaAssunto(disciplina);
 				
 			}
 			
@@ -116,7 +124,7 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	}
 
 	@Override
-	public List<br.com.doors.ctrlt.model.Assunto> listarTodos() {
+	public List<Assunto> listarTodos() {
 		List<Assunto> assuntos = new ArrayList<>();
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(LISTAR);
@@ -126,9 +134,13 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 			Assunto assunto;
 			
 			while (rs.next()) {
+				Disciplina disciplina = new Disciplina();
+				disciplina.setIdDisciplina(rs.getLong("idDisciplina"));
+				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
 				assunto = new Assunto();
 				assunto.setIdAssunto(rs.getLong("idAssunto"));
 				assunto.setNomeAssunto(rs.getString("nomeAssunto"));
+				assunto.setDisciplinaAssunto(disciplina);
 				assuntos.add(assunto);
 			}
 			

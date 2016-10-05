@@ -79,7 +79,7 @@ public class ProfessorDAO implements InterfaceProfessorDAO {
 		if (t.getSenhaProfessor() == null || t.getSenhaProfessor().isEmpty()) {
 			t.setSenhaProfessor(professor.getSenhaProfessor());
 		}
-		if (t.getEscolaProfessor() == null || t.getEscolaProfessor().isEmpty()) {
+		if (t.getEscolaProfessor() == null || t.getEscolaProfessor().isEmpty()) { // TODO FAZER ISSO EM TODOS OS DAO'S
 			t.setEscolaProfessor(professor.getEscolaProfessor());
 		}
 		if (t.getTagProfessor() == null || t.getTagProfessor().isEmpty()) {

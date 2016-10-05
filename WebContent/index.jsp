@@ -26,12 +26,33 @@
 			type="text" name="senha" value="1"> <input type="submit"
 			value="LoginEspecialista">
 	</form>
+	<div style="border: aqua solid;">
+	<h1>Professor</h1>
 	<p>
 		<a href="CadastrandoProfessor"> auto cadastro prof </a>
 	</p>
 	<p>
 		<a href="ListandoProfessor"> listar </a>
 	</p>
+	</div>
+	<div style="border: aqua solid;">
+	<h1>Disciplina</h1>
+	<p>
+		<a href="CadastrandoDisciplina"> cadastro</a>
+	</p>
+	<p>
+		<a href="ListandoDisciplina"> listar </a>
+	</p>
+	</div>
+	<div style="border: aqua solid;">
+	<h1>Assunto</h1>
+	<p>
+		<a href="CadastrandoAssunto"> cadastro</a>
+	</p>
+	<p>
+		<a href="ListandoAssunto"> listar </a>
+	</p>
+	</div>
 	<p>
 		<a href="CadastroAluno"> auto cadastro </a>
 	</p>

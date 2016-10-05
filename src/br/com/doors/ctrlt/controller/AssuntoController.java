@@ -27,8 +27,9 @@ public class AssuntoController {
 	
 	@RequestMapping("CadastrandoAssunto")
 	public String caminhoCadastro(HttpSession session, Long id) {
-		List<Disciplina>disciplinas = new ArrayList<Disciplina>();
+		List<Disciplina>disciplinas = null;
 		if (id != null) {			
+			disciplinas = new ArrayList<Disciplina>();
 			Assunto assunto = assuntoDAO.procurar(id);
 			session.setAttribute("alterando", assunto);
 			disciplinas.add(assunto.getDisciplinaAssunto());
@@ -37,6 +38,9 @@ public class AssuntoController {
 					disciplinas.add(disciplina);
 				}
 			}
+		}
+		if (disciplinas == null) {
+			disciplinas = disciplinasDAO.listarTodos();
 		}
 		session.setAttribute("disciplinas", disciplinas);
 		return "CadastroAssunto";

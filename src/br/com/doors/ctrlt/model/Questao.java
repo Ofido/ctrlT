@@ -1,7 +1,8 @@
 package br.com.doors.ctrlt.model;
 
+import java.sql.Time;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.Calendar;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
@@ -17,8 +18,8 @@ public class Questao {
 	private Integer ratingProfessorQuestao;
 	private Integer nivelQuestao;
 	private String questao;
-	private Date tempoQuestao;
-	private Date ultimoUsoQuestao;
+	private Time tempoQuestao;
+	private Calendar ultimoUsoQuestao;
 	private Boolean validadaQuestao;
 	private byte[] complementoQuestao;
 

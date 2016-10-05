@@ -91,6 +91,9 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 
 	@Override
 	public void excluir(Assunto t) {
+		if (t==null) {
+			throw new RuntimeException("ASSUNTO NÃO PODE SER NULO" + this.getClass());
+		}
 		excluir(t.getIdAssunto());
 	}
 

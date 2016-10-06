@@ -87,22 +87,6 @@ public class Questao {
 		this.nivelQuestao = nivelQuestao;
 	}
 
-	public Date getTempoQuestao() {
-		return tempoQuestao;
-	}
-
-	public void setTempoQuestao(Date tempoQuestao) {
-		this.tempoQuestao = tempoQuestao;
-	}
-
-	public Date getUltimoUsoQuestao() {
-		return ultimoUsoQuestao;
-	}
-
-	public void setUltimoUsoQuestao(Date ultimoUsoQuestao) {
-		this.ultimoUsoQuestao = ultimoUsoQuestao;
-	}
-
 	public Boolean getValidadaQuestao() {
 		return validadaQuestao;
 	}

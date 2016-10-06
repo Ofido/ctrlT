@@ -52,7 +52,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(2, t.getDisciplinaQuestao().getIdDisciplina());
 			stmt.setLong(3, t.getCriadorQuestao().getIdProfessor());
 			stmt.setLong(4, t.getValidadorQuestao().getIdEspecialista());
-			stmt.setString(5, t.getTempoQuestao());
+			//stmt.setString(5, t.getTempoQuestao());
 			
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();

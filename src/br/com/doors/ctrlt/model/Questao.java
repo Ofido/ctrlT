@@ -18,7 +18,7 @@ public class Questao {
 	private Integer ratingProfessorQuestao;
 	private Integer nivelQuestao;
 	private String questao;
-	private Time tempoQuestao;
+	private Calendar tempoQuestao;
 	private Calendar ultimoUsoQuestao;
 	private Boolean validadaQuestao;
 	private byte[] complementoQuestao;
@@ -130,6 +130,22 @@ public class Questao {
 
 	public void setRatingProfessorQuestao(Integer ratingProfessorQuestao) {
 		this.ratingProfessorQuestao = ratingProfessorQuestao;
+	}
+
+	public Calendar getTempoQuestao() {
+		return tempoQuestao;
+	}
+
+	public void setTempoQuestao(Calendar tempoQuestao) {
+		this.tempoQuestao = tempoQuestao;
+	}
+
+	public Calendar getUltimoUsoQuestao() {
+		return ultimoUsoQuestao;
+	}
+
+	public void setUltimoUsoQuestao(Calendar ultimoUsoQuestao) {
+		this.ultimoUsoQuestao = ultimoUsoQuestao;
 	}
 
 	@Override

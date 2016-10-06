@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.com.doors.ctrlt.dao.DisciplinaDAO;
 import br.com.doors.ctrlt.dao.ProfessorDAO;
-import br.com.doors.ctrlt.model.Disciplina;
 import br.com.doors.ctrlt.model.Professor;
 
 @Controller

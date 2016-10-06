@@ -11,21 +11,7 @@ import javax.sql.DataSource;
 import br.com.doors.ctrlt.model.Questao;
 
 public class QuestaoDAO implements InterfaceQuestaoDAO {
-	private static final String INCLUIR = "insert into ctrlt.questao(idQuestao, "
-																+ "idDisciplina, "
-																+ "idProfessor, "
-																+ "idEspecialista, "
-																+ "tempoQuestao, "
-																+ "nivelQuestao, "
-																+ "questao, "
-																+ "ultimoUsoQuestao, "
-																+ "validadaQuestao, "
-																+ "comentárioQuestao, "
-																+ "tipoQuestao, "
-																+ "complementoQuestao, "
-																+ "quantidadeUso, "
-																+ "ratingAluno, "
-																+ "ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INCLUIR = "insert into ctrlt.questao(idQuestao, idDisciplina, idProfessor, idEspecialista, tempoQuestao, nivelQuestao, questao, ultimoUsoQuestao, validadaQuestao, comentárioQuestao, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.questao where idQuestao=?";
 	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, nomeQuestao=? where idQuestao=?";
 	private static final String LISTAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista";

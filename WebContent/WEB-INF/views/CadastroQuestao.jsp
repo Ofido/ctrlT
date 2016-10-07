@@ -27,6 +27,9 @@
 		<!-- TODO colocar select de assunto -->
 		<label></label>
 		<input type="radio" value="TipoQuestao" name="UNICA">
+		<input type="radio" value="TipoQuestao" name="DISSERTATIVA">
+		<input type="radio" value="TipoQuestao" name="VERDADEIROFALSO">
+		<input type="radio" value="TipoQuestao" name="MULTIPLA">
 		<input type="submit" value="Cadastro">
 	</form>
 </body>

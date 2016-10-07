@@ -17,7 +17,9 @@ public class Questao {
 	private Integer ratingAlunoQuestao;
 	private Integer ratingProfessorQuestao;
 	private Integer nivelQuestao;
+	private Long usoQuestao;
 	private String questao;
+	private String comentario;
 	private Calendar tempoQuestao;
 	private Calendar ultimoUsoQuestao;
 	private Boolean validadaQuestao;
@@ -37,6 +39,14 @@ public class Questao {
 
 	public void setQuestao(String questao) {
 		this.questao = questao;
+	}
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
 	}
 
 	public TipoQuestao getTipoQuestao() {
@@ -142,6 +152,14 @@ public class Questao {
 
 	public Calendar getUltimoUsoQuestao() {
 		return ultimoUsoQuestao;
+	}
+
+	public Long getUsoQuestao() {
+		return usoQuestao;
+	}
+
+	public void setUsoQuestao(Long usoQuestao) {
+		this.usoQuestao = usoQuestao;
 	}
 
 	public void setUltimoUsoQuestao(Calendar ultimoUsoQuestao) {

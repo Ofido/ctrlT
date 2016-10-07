@@ -131,13 +131,13 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 			Especialista especialista;
 			while (rs.next()) {
 				especialista = new Especialista();
-				especialista.setIdEspecialista(rs.getLong("idprofessor"));
-				especialista.setNomeEspecialista(rs.getString("nomeprofessor"));
-				especialista.setEmailEspecialista(rs.getString("emailprofessor"));
-				especialista.setSenhaEspecialista(rs.getString("senhaprofessor"));
-				especialista.setCpfEspecialista(rs.getString("cpfProfessor"));
-				especialista.setTelefoneEspecialista(rs.getString("telefoneProfessor"));
-				especialista.setFotoEspecialista(rs.getBytes("fotoProfessor"));
+				especialista.setIdEspecialista(rs.getLong("idespecialista"));
+				especialista.setNomeEspecialista(rs.getString("nomeespecialista"));
+				especialista.setEmailEspecialista(rs.getString("emailespecialista"));
+				especialista.setSenhaEspecialista(rs.getString("senhaespecialista"));
+				especialista.setCpfEspecialista(rs.getString("cpfespecialista"));
+				especialista.setTelefoneEspecialista(rs.getString("telefoneespecialista"));
+				especialista.setFotoEspecialista(rs.getBytes("fotoespecialista"));
 				especialistas.add(especialista);
 			}
 			rs.close();
@@ -177,6 +177,9 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 				especialista.setNomeEspecialista(rs.getString("nomeespecialista"));
 				especialista.setEmailEspecialista(rs.getString("emailespecialista"));
 				especialista.setSenhaEspecialista(rs.getString("senhaespecialista"));
+				especialista.setCpfEspecialista(rs.getString("cpfespecialista"));
+				especialista.setTelefoneEspecialista(rs.getString("telefoneespecialista"));
+				especialista.setFotoEspecialista(rs.getBytes("fotoespecialista"));
 			} else {
 				especialista = null;
 			}

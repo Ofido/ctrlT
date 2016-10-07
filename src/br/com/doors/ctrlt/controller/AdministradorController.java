@@ -8,11 +8,11 @@ import br.com.doors.ctrlt.dao.AdministradorDAO;
 
 @Controller
 public class AdministradorController {
-	private final AdministradorDAO dao;
+	private final AdministradorDAO admDAO;
 	
 	@Autowired
 	public AdministradorController(AdministradorDAO daoA){
-		this.dao = daoA;
+		this.admDAO= daoA;
 	}
 	
 	@RequestMapping("voltaInicioAdm")

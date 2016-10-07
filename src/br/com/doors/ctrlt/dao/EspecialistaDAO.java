@@ -118,8 +118,7 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 
 	@Override
 	public void excluir(Especialista t) {
-		// TODO Auto-generated method stub
-		
+		excluir(t.getIdEspecialista());
 	}
 
 	@Override

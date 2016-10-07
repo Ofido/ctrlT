@@ -63,7 +63,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 	}
 
 	@Override
-	public void excluir(Long id) {
+	public void excluir(Long id) {	
 		// TODO Auto-generated method stub
 
 	}

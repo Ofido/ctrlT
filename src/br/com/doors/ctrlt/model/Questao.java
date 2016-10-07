@@ -1,6 +1,5 @@
 package br.com.doors.ctrlt.model;
 
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -10,7 +9,7 @@ public class Questao {
 	private Long idQuestao;	
 	private TipoQuestao tipoQuestao;
 	private Disciplina disciplinaQuestao;
-	private Assunto assuntoQuestao;
+	private Assunto assuntoQuestao; //TODO ADD NO BANCO
 	private Professor criadorQuestao;
 	private Especialista validadorQuestao;
 	private Resposta[] respostasQuestao;

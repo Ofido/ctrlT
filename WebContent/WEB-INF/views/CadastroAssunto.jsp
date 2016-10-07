@@ -12,7 +12,7 @@
 <input type="hidden" name="idAssunto" value="${alterando.idAssunto }">
 <label for="nomeAssunto">nomeAssunto</label>
 <input type="text" name="nomeAssunto" value="${alterando.nomeAssunto }"></br></br>
-<label for="emailAssunto">emailAssunto</label>
+<label for="Disciplina">Disciplina</label>
 <select name="idDisciplina">
 	<c:forEach items="${disciplinas}" var="d">
 		<option value="${d.idDisciplina}">${d.nomeDisciplina}</option>

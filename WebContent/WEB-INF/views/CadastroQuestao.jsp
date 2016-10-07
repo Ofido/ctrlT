@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,17 +8,26 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="CadastroAssunto" enctype="multipart/form-data" method="post">
-<input type="hidden" name="idAssunto" value="${alterando.idAssunto }">
-<label for="nomeAssunto">nomeAssunto</label>
-<input type="text" name="nomeAssunto" value="${alterando.nomeAssunto }"></br></br>
-<label for="emailAssunto">emailAssunto</label>
-<select name="idDisciplina">
-	<c:forEach items="${disciplinas}" var="d">
-		<option value="${d.idDisciplina}">${d.nomeDisciplina}</option>
-	</c:forEach>
-</select>
-<input type="submit" value="Cadastro">
-</form>
+	<form action="CadastroQuestao" enctype="multipart/form-data"
+		method="post">
+		<input type="hidden" name="idQuestao" value="${alterando.idQuestao }">
+		<input type="hidden" name="idProfessor"
+			value="${alterando.criadorQuestao.idProfessor }"> <input
+			type="hidden" name="idEspecialista"
+			value="${alterando.validadorQuestao.idEspecialista }"> <label
+			for="questao">Enunciado:</label> <input type="text" name="questao"
+			value="${alterando.questao }"></br>
+		</br>
+		<!-- TODO MUDAR PARA TEXT AREA -->
+		<label for="Disciplina">Disciplina</label> <select name="idDisciplina">
+			<c:forEach items="${disciplinas}" var="d">
+				<option value="${d.idDisciplina}">${d.nomeDisciplina}</option>
+			</c:forEach>
+		</select>
+		<!-- TODO colocar select de assunto -->
+		<label></label>
+		<input type="radio" value="TipoQuestao" name="TipoQuestao">
+		<input type="submit" value="Cadastro">
+	</form>
 </body>
 </html>

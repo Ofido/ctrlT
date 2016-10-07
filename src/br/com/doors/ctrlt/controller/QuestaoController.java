@@ -35,12 +35,12 @@ public class QuestaoController {
 	@RequestMapping("CadastrandoQuestao")
 	public String caminhoCadastro(HttpSession session, Long id) {
 		List<Disciplina>disciplinas = null;
-		session.setAttribute("usuarioLogado", professorDAO.procurar(1L));//TODO TEIRAR APOS TESTE
+		session.setAttribute("professor", professorDAO.procurar(1L));//TODO TEIRAR APOS TESTE
 		if (id != null) {			
-			
 			disciplinas = new ArrayList<Disciplina>();
 			Questao questao = questaoDAO.procurar(id);
 			session.setAttribute("alterando", questao);
+			session.setAttribute("especialista", especialistaDAO.procurar(questao.getValidadorQuestao().getIdEspecialista()));//TODO TEIRAR APOS TESTE
 			disciplinas.add(questao.getDisciplinaQuestao());
 			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
 				if (disciplina.getIdDisciplina() != questao.getDisciplinaQuestao().getIdDisciplina()) {

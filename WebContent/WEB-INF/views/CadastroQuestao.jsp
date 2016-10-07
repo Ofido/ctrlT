@@ -26,7 +26,9 @@
 		</select>
 		<!-- TODO colocar select de assunto -->
 		<label></label>
-		<input type="radio" value="TipoQuestao" name="TipoQuestao">
+		<input type="radio" value="TipoQuestao" name="UNICA">
+		<input type="radio" value="TipoQuestao" name="UNICA">
+		<input type="radio" value="TipoQuestao" name="UNICA">
 		<input type="submit" value="Cadastro">
 	</form>
 </body>

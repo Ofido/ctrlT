@@ -1,18 +1,21 @@
 package br.com.doors.ctrlt.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.doors.ctrlt.dao.AssuntoDAO;
 import br.com.doors.ctrlt.dao.DisciplinaDAO;
 import br.com.doors.ctrlt.dao.EspecialistaDAO;
 import br.com.doors.ctrlt.dao.ProfessorDAO;
 import br.com.doors.ctrlt.dao.QuestaoDAO;
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
+import br.com.doors.ctrlt.model.Questao;
 
 @Controller
 public class QuestaoController {
@@ -29,23 +32,39 @@ public class QuestaoController {
 		this.especialistaDAO = especialistaDAO;
 	}
 	
-	@RequestMapping("CadastrandoAssunto")
+	@RequestMapping("CadastrandoQuestao")
 	public String caminhoCadastro(HttpSession session, Long id) {
-		return "CadastroAssunto";
+		List<Disciplina>disciplinas = null;
+		if (id != null) {			
+			disciplinas = new ArrayList<Disciplina>();
+			Questao questao = questaoDAO.procurar(id);
+			session.setAttribute("alterando", questao);
+			disciplinas.add(questao.getDisciplinaQuestao());
+			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
+				if (disciplina.getIdDisciplina() != questao.getDisciplinaQuestao().getIdDisciplina()) {
+					disciplinas.add(disciplina);
+				}
+			}
+		}
+		if (disciplinas == null) {
+			disciplinas = disciplinasDAO.listarTodos();
+		}
+		session.setAttribute("disciplinas", disciplinas);
+		return "CadastroQuestao";
 	}
 	
-	@RequestMapping("ListandoAssunto")
+	@RequestMapping("ListandoQuestao")
 	private String listar(HttpSession session) {
-		return "ListarAssunto";
+		return "ListarQuestao";
 	}
 	
-	@RequestMapping("ExcluirAssunto")
+	@RequestMapping("ExcluirQuestao")
 	private String excluir(Long id) {
-		return "redirect:ListandoAssunto";
+		return "redirect:ListandoQuestao";
 	}
 	
-	@RequestMapping("CadastroAssunto")
-	public String cadastro(HttpSession session, Assunto assunto, Disciplina disciplina) {
+	@RequestMapping("CadastroQuestao")
+	public String cadastro(HttpSession session, Questao questao, Disciplina disciplina) {
 		return "Index";
 	}
 }

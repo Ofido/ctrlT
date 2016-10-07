@@ -35,7 +35,9 @@ public class QuestaoController {
 	@RequestMapping("CadastrandoQuestao")
 	public String caminhoCadastro(HttpSession session, Long id) {
 		List<Disciplina>disciplinas = null;
+		session.setAttribute("usuarioLogado", professorDAO.procurar(1L));//TODO TEIRAR APOS TESTE
 		if (id != null) {			
+			
 			disciplinas = new ArrayList<Disciplina>();
 			Questao questao = questaoDAO.procurar(id);
 			session.setAttribute("alterando", questao);

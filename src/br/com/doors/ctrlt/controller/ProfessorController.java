@@ -54,11 +54,11 @@ public class ProfessorController {
 		}else {
 			profDAO.alterar(professor);
 		}
-		return "Index";
+		return "index";
 	}
 	
 	@RequestMapping("voltaInicioProfessor")
-	public String voltaInicioAdm(){
+	public String voltaInicioProf(){
 		return "";
 	}
 }

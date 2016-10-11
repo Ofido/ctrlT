@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.com.doors.ctrlt.dao.AssuntoDAO;
 import br.com.doors.ctrlt.dao.DisciplinaDAO;
@@ -79,16 +80,25 @@ public class QuestaoController {
 	
 	@RequestMapping("ListandoQuestao")
 	private String listar(HttpSession session) {
+		session.setAttribute("lista", questaoDAO.listarTodos());
 		return "ListarQuestao";
 	}
-	
+
 	@RequestMapping("ExcluirQuestao")
 	private String excluir(Long id) {
+		questaoDAO.excluir(id);
 		return "redirect:ListandoQuestao";
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(HttpSession session, Questao questao, Disciplina disciplina) {
-		return "Index";
+	public String cadastro(HttpSession session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo) {
+		questao.setDisciplinaQuestao(disciplina);
+		questao.setAssuntoQuestao(assunto);
+		if (questao.getIdQuestao() == null) {			
+			questaoDAO.incluir(questao);
+		}else {
+			questaoDAO.alterar(questao);
+		}
+		return "index";
 	}
 }

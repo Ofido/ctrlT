@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Lista</title>
+<title>Lista de Assuntos</title>
 </head>
 <body>
 <table border="2" bordercolor="RED">
@@ -17,7 +17,7 @@
 			NOME
 		</th>
 		<th>
-			Discilina
+			DISCIPLINA
 		</th>
 		<th>
 			EXCLUI

@@ -54,11 +54,11 @@ public class EspecialistaController {
 		}else {
 			espDAO.alterar(especialista);
 		}
-		return "Index";
+		return "index";
 	}
 	
 	@RequestMapping("voltaInicioEspecialista")
-	public String voltaInicioAdm(){
+	public String voltaInicioEsp(){
 		return "";
 	}
 }

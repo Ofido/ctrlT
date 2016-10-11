@@ -62,8 +62,14 @@
 		<a href="ListandoQuestao"> listar </a>
 	</p>
 	</div>
+	<div style="border: aqua solid;">
+	<h1>Aluno</h1>
 	<p>
-		<a href="CadastroAluno"> auto cadastro </a>
+		<a href="CadastrandoAluno"> auto cadastro aluno </a>
 	</p>
+	<p>
+		<a href="ListandoAluno"> listar </a>
+	</p>
+	</div>
 </body>
 </html>

@@ -44,6 +44,6 @@ public class DisciplinaController {
 		}else {
 			disciplinaDAO.alterar(disciplina);
 		}
-		return "Index";
+		return "index";
 	}
 }

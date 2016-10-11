@@ -12,6 +12,9 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
 import br.com.doors.ctrlt.model.Especialista;
@@ -19,6 +22,7 @@ import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Questao;
 import br.com.doors.ctrlt.model.TipoQuestao;
 
+@Repository
 public class QuestaoDAO implements InterfaceQuestaoDAO {
 	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, tempoQuestao, "
 			+ "nivelQuestao, questao, validadaQuestao, comentarioQuestao, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -30,6 +34,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 	
 	private static Connection CONEXAO;
 	
+	@Autowired
 	public QuestaoDAO(DataSource ds) {
 		try {
 			this.CONEXAO = ds.getConnection();

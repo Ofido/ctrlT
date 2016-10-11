@@ -7,8 +7,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.doors.ctrlt.dao.AssuntoDAO;
 import br.com.doors.ctrlt.dao.DisciplinaDAO;
 import br.com.doors.ctrlt.dao.EspecialistaDAO;
 import br.com.doors.ctrlt.dao.ProfessorDAO;
@@ -23,35 +25,55 @@ public class QuestaoController {
 	private final QuestaoDAO questaoDAO;
 	private final ProfessorDAO professorDAO;
 	private final EspecialistaDAO especialistaDAO;
+	private final AssuntoDAO assuntoDAO;
 	
 	@Autowired
-	public QuestaoController(ProfessorDAO professorDAO, DisciplinaDAO disciplinaDAO, QuestaoDAO questaoDAO, EspecialistaDAO especialistaDAO){
+	public QuestaoController(ProfessorDAO professorDAO, DisciplinaDAO disciplinaDAO, QuestaoDAO questaoDAO, EspecialistaDAO especialistaDAO, AssuntoDAO assuntoDAO){
 		this.professorDAO = professorDAO;
 		this.disciplinasDAO = disciplinaDAO;
 		this.questaoDAO = questaoDAO;
 		this.especialistaDAO = especialistaDAO;
+		this.assuntoDAO = assuntoDAO;
 	}
 	
 	@RequestMapping("CadastrandoQuestao")
-	public String caminhoCadastro(HttpSession session, Long id) {
+	public String caminhoCadastro(HttpSession session, Model modelo, Long id) {
 		List<Disciplina>disciplinas = null;
+		List<Assunto>assuntos = null;
 		session.setAttribute("professor", professorDAO.procurar(1L));//TODO TEIRAR APOS TESTE
 		if (id != null) {			
 			disciplinas = new ArrayList<Disciplina>();
+			assuntos = new ArrayList<Assunto>();
 			Questao questao = questaoDAO.procurar(id);
-			session.setAttribute("alterando", questao);
-			session.setAttribute("especialista", especialistaDAO.procurar(questao.getValidadorQuestao().getIdEspecialista()));//TODO TEIRAR APOS TESTE
+			modelo.addAttribute("alterando", questao);
+			modelo.addAttribute("especialista", especialistaDAO.procurar(questao.getValidadorQuestao().getIdEspecialista()));//TODO TEIRAR APOS TESTE
 			disciplinas.add(questao.getDisciplinaQuestao());
+			assuntos.add(questao.getAssuntoQuestao());
 			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
 				if (disciplina.getIdDisciplina() != questao.getDisciplinaQuestao().getIdDisciplina()) {
 					disciplinas.add(disciplina);
+				}
+			}
+			for (Assunto assunto : assuntoDAO.procurarDisciplina(questao.getDisciplinaQuestao().getIdDisciplina())) {
+				if (assunto.getIdAssunto() != questao.getAssuntoQuestao().getIdAssunto()) {
+					assuntos.add(assunto);
 				}
 			}
 		}
 		if (disciplinas == null) {
 			disciplinas = disciplinasDAO.listarTodos();
 		}
-		session.setAttribute("disciplinas", disciplinas);
+		if (assuntos == null) {
+			assuntos = assuntoDAO.listarTodos();
+		}
+		modelo.addAttribute("disciplinas", disciplinas);
+		modelo.addAttribute("assunto", assuntos);
+		return "CadastroQuestao";
+	}
+	
+	@RequestMapping("consultarAssunto")
+	private String consultar(Model modelo, Long id) {
+		modelo.addAttribute("assunto", assuntoDAO.procurarDisciplina(id)); // TODO FAZER ESSE METODO FUNCIONAR
 		return "CadastroQuestao";
 	}
 	

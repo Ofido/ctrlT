@@ -22,6 +22,7 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	private static final String ALTERAR = "update ctrlt.assunto set idDisciplina=?, nomeAssunto=? where idAssunto=?";
 	private static final String LISTAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina";
 	private static final String PROCURAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina and idassunto=?";
+	private static final String PROCURAR_DISCIPLINA = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina and disciplina.idDisciplina=?";
 
 	// CONEXÃO
 	private static Connection CONEXAO;
@@ -151,6 +152,36 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 			stmt.close();
 		} catch (SQLException e) {
 			throw new RuntimeException("ERRO NA ALTERACAO DE DISCIPLINA" + this.getClass() + e.toString());
+		}
+		return assuntos;
+	}
+
+	public List<Assunto> procurarDisciplina(Long id) {
+		List<Assunto> assuntos = new ArrayList<>();
+		try {
+			PreparedStatement stmt = CONEXAO.prepareStatement(PROCURAR_DISCIPLINA);
+			
+			stmt.setLong(1, id);
+			
+			ResultSet rs = stmt.executeQuery();
+			
+			Assunto assunto;
+			
+			while (rs.next()) {
+				Disciplina disciplina = new Disciplina();
+				disciplina.setIdDisciplina(rs.getLong("idDisciplina"));
+				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
+				assunto = new Assunto();
+				assunto.setIdAssunto(rs.getLong("idAssunto"));
+				assunto.setNomeAssunto(rs.getString("nomeAssunto"));
+				assunto.setDisciplinaAssunto(disciplina);
+				assuntos.add(assunto);
+			}
+			
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("ERRO NO PROCURAR DE ASSUNTO" + this.getClass() + e.toString());
 		}
 		return assuntos;
 	}

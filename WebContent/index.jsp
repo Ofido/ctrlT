@@ -11,7 +11,7 @@
 		<input type="text" name="email" value="a@a.com"><input
 			type="text" name="senha" value="1"> <input type="submit"
 			value="LoginAluno">
-	</form>
+	</form>	
 	<form action="efetuaLogin">
 		<input type="text" name="email" value="1@1"><input type="text"
 			name="senha" value="1"> <input type="submit" value="LoginAdm">

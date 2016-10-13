@@ -1,6 +1,7 @@
 package br.com.doors.ctrlt.controller;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpSession;
 
@@ -41,10 +42,16 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("CadastroAluno")
-	public String cadastro(HttpSession session, Aluno aluno, MultipartFile arquivo) {
-		if (!arquivo.isEmpty()) {
+	public String cadastro(HttpSession session, Aluno aluno, MultipartFile ft, String aniversario) {
+		System.out.println("aqui");
+		System.out.println(aniversario);
+		Calendar calendar = Calendar.getInstance();
+		String[] strings = aniversario.split("-");
+		calendar.set(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
+		aluno.setAniversarioAluno(calendar);
+		if (!ft.isEmpty()) {
 			try {
-				aluno.setFotoAluno(arquivo.getBytes());
+				aluno.setFotoAluno(ft.getBytes());
 			} catch (IOException e) {
 				throw new RuntimeException("ERRO NA FOTO"+ this.getClass() + e.toString());
 			}

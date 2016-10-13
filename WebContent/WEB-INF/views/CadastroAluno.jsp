@@ -35,9 +35,9 @@
 <label for="complementoAluno">complementoAluno</label>
 <input type="text" name="complementoAluno" value="${alterando.complementoAluno }"></br></br>
 <label for="aniversarioAluno">nascimentoAluno</label>
-<input type="Date" name="aniversarioAluno" value="${alterando.aniversarioAluno }"></br></br>
-<label for="fotoAluno">foto :</label>
-<input type="file" name="arquivo" accept="image/jpeg"></br></br>
+<input type="Date" name="aniversario" value="${alterando.aniversarioAluno }"></br></br>
+<label for="ft">foto :</label>
+<input type="file" name="ft" accept="image/*"></br></br>
 <input type="submit" value="Cadastro">
 </form>
 </body>

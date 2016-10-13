@@ -181,6 +181,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);
 				questao.setTempoQuestao(tempoQuestao);
+				questao.setIdQuestao(rs.getLong("idQuestao"));
 				questao.setNivelQuestao(rs.getInt("nivelQuestao"));
 				questao.setQuestao(rs.getString("questao"));
 				questao.setValidadaQuestao(rs.getBoolean("validadaQuestao"));
@@ -237,6 +238,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				tempoQuestao.setTimeInMillis(rs.getLong("tempoQuestao"));
 				
 				Questao questao = new Questao();				
+				questao.setIdQuestao(rs.getLong("idQuestao"));
 				questao.setDisciplinaQuestao(disciplina);
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);

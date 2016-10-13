@@ -105,8 +105,8 @@ public class QuestaoController {
 				throw new RuntimeException("ERRO NA FOTO"+ this.getClass() + e.toString());
 			}
 		}
-		questao.setCriadorQuestao(professorDAO.procurar(10L));//TODO arrumar
-		questao.setValidadorQuestao(especialistaDAO.procurar(2L));//TODO arrumar
+		questao.setCriadorQuestao(professorDAO.procurar(11L));//TODO arrumar
+		questao.setValidadorQuestao(especialistaDAO.procurar(1L));//TODO arrumar
 		questao.setDisciplinaQuestao(disciplina);
 		questao.setAssuntoQuestao(assunto);
 		if (questao.getIdQuestao() == null) {			

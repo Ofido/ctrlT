@@ -1,6 +1,8 @@
 package br.com.doors.ctrlt.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,8 @@ import br.com.doors.ctrlt.dao.ProfessorDAO;
 import br.com.doors.ctrlt.dao.QuestaoDAO;
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
+import br.com.doors.ctrlt.model.Especialista;
+import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Questao;
 
 @Controller
@@ -41,13 +45,12 @@ public class QuestaoController {
 	public String caminhoCadastro(HttpSession session, Model modelo, Long id) {
 		List<Disciplina>disciplinas = null;
 		List<Assunto>assuntos = null;
-		session.setAttribute("professor", professorDAO.procurar(1L));//TODO TEIRAR APOS TESTE
 		if (id != null) {			
 			disciplinas = new ArrayList<Disciplina>();
 			assuntos = new ArrayList<Assunto>();
 			Questao questao = questaoDAO.procurar(id);
 			modelo.addAttribute("alterando", questao);
-			modelo.addAttribute("especialista", especialistaDAO.procurar(questao.getValidadorQuestao().getIdEspecialista()));//TODO TEIRAR APOS TESTE
+			modelo.addAttribute("especialista", especialistaDAO.procurar(2L));//TODO TEIRAR APOS TESTE
 			disciplinas.add(questao.getDisciplinaQuestao());
 			assuntos.add(questao.getAssuntoQuestao());
 			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
@@ -91,7 +94,19 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(HttpSession session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo) {
+	public String cadastro(HttpSession session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(0, 0, 0, 0, tempo);
+		questao.setTempoQuestao(calendar);
+		if (!arquivo.isEmpty()) {
+			try {
+				questao.setComplementoQuestao(arquivo.getBytes());
+			} catch (IOException e) {
+				throw new RuntimeException("ERRO NA FOTO"+ this.getClass() + e.toString());
+			}
+		}
+		questao.setCriadorQuestao(professorDAO.procurar(10L));//TODO arrumar
+		questao.setValidadorQuestao(especialistaDAO.procurar(2L));//TODO arrumar
 		questao.setDisciplinaQuestao(disciplina);
 		questao.setAssuntoQuestao(assunto);
 		if (questao.getIdQuestao() == null) {			

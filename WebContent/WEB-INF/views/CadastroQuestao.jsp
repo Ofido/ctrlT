@@ -76,10 +76,10 @@
 			</c:forEach>
 		</select></br>
 		<label>Tipo Questao:</label>
-		<input type="radio" value="TipoQuestao" name="UNICA">
-		<input type="radio" value="TipoQuestao" name="DISSERTATIVA"> <input
-			type="radio" value="TipoQuestao" name="VERDADEIROFALSO"> <input
-			type="radio" value="TipoQuestao" name="MULTIPLA">
+		<input type="radio" value="UNICA" name="TipoQuestao">
+		<input type="radio" value="DISSERTATIVA" name="TipoQuestao"> <input
+			type="radio" value="VERDADEIROFALSO" name="TipoQuestao"> <input
+			type="radio" value="MULTIPLA" name="TipoQuestao">
 			<br /><br />
 		<label>Dificuldade da questão: </label><br />
 		 <input type="radio" name="nivelQuestao" value="0" required />1
@@ -93,11 +93,11 @@
 		 <input type="radio" name="nivelQuestao" value="8" required />9
 		 <input type="radio" name="nivelQuestao" value="9" required />10<br/><br /><br />
 		 
-		 <label>Tempo Questao: </label>
-		 <input type="hour" name="tempoQuestao"><br/><br /><br />
+		 <label>Tempo Questao: (min)</label>
+		 <input type="text" name="tempo"><br/><br /><br />
 		 
 		 <label>Complemento:</label>
-			<input type="file" name="arquivo" accept="image/jpeg"></br></br>
+			<input type="file" name="arquivo" accept="image/*"></br></br>
 			<input type="submit" value="Cadastro">
 	</form>
 	<form action="consultarAssunto">

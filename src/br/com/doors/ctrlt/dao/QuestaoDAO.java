@@ -25,10 +25,10 @@ import br.com.doors.ctrlt.model.TipoQuestao;
 @Repository
 public class QuestaoDAO implements InterfaceQuestaoDAO {
 	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, tempoQuestao, "
-			+ "nivelQuestao, questao, validadaQuestao, comentarioQuestao, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "nivelQuestao, questao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.questao where idQuestao=?";
 	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, idProfessor=?, idEspecialista=?, tempoQuestao=?, "
-			+ "nivelQuestao=?, questao=?, validadaQuestao=?, comentarioQuestao=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
+			+ "nivelQuestao=?, questao=?, validadaQuestao=?, comentario=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
 	private static final String LISTAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista";
 	private static final String PROCURAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista and idquestao=?";
 	
@@ -57,13 +57,13 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(5, t.getNivelQuestao());
 			stmt.setString(6, t.getQuestao());
 			//TODO POR ULTIMO USO QUESTAO AQUI
-			stmt.setBoolean(7, t.getValidadaQuestao());
+			stmt.setBoolean(7, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
 			stmt.setString(8, t.getComentario());
 			stmt.setInt(9, t.getTipoQuestao().ordinal());
 			stmt.setBlob(10, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(11, t.getUsoQuestao());
-			stmt.setInt(12, t.getRatingAlunoQuestao());
-			stmt.setInt(13, t.getRatingProfessorQuestao());
+			stmt.setLong(11, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(12, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(13, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -148,6 +148,11 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				disciplina.setIdDisciplina(rs.getLong("idDisciplina"));
 				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
 				
+				Assunto assunto = new Assunto();
+				assunto.setIdAssunto(rs.getLong("idassunto"));
+				assunto.setNomeAssunto(rs.getString("nomeassunto"));
+				assunto.setDisciplinaAssunto(disciplina);
+				
 				Professor professor = new Professor();
 				professor.setIdProfessor(rs.getLong("idprofessor"));
 				professor.setNomeProfessor(rs.getString("nomeprofessor"));
@@ -179,7 +184,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				questao.setNivelQuestao(rs.getInt("nivelQuestao"));
 				questao.setQuestao(rs.getString("questao"));
 				questao.setValidadaQuestao(rs.getBoolean("validadaQuestao"));
-				questao.setComentario(rs.getString("comentarioQuestao"));
+				questao.setComentario(rs.getString("comentario"));
 				questao.setTipoQuestao(TipoQuestao.tipo(rs.getInt("tipoQuestao")));
 				questao.setComplementoQuestao(rs.getBytes("complementoQuestao"));
 				questao.setUsoQuestao(rs.getLong("quantidadeUso"));
@@ -239,7 +244,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				questao.setNivelQuestao(rs.getInt("nivelQuestao"));
 				questao.setQuestao(rs.getString("questao"));
 				questao.setValidadaQuestao(rs.getBoolean("validadaQuestao"));
-				questao.setComentario(rs.getString("comentarioQuestao"));
+				questao.setComentario(rs.getString("comentario"));
 				questao.setTipoQuestao(TipoQuestao.tipo(rs.getInt("tipoQuestao")));
 				questao.setComplementoQuestao(rs.getBytes("complementoQuestao"));
 				questao.setUsoQuestao(rs.getLong("quantidadeUso"));

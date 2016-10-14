@@ -25,9 +25,7 @@ public class Assunto {
 	}
 	@Override
 	public String toString() {
-		return "Assunto [idAssunto=" + idAssunto + ", nomeAssunto="
-				+ nomeAssunto + ", disciplinaAssunto=" + disciplinaAssunto
-				+ "]";
+		return disciplinaAssunto.getIdDisciplina().toString();
 	}
 	
 }

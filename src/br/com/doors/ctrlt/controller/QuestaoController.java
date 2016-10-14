@@ -90,7 +90,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo) {
+	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
@@ -110,6 +110,11 @@ public class QuestaoController {
 		}else {
 			questaoDAO.alterar(questao);
 		}
-		return "index";
+		if (tipoCadastro.contains("CadastroComum")) {
+			return "index";
+		}else{
+			return "redirect:CadastrandoAlternativa";
+		}
+		
 	}
 }

@@ -2,10 +2,9 @@ package br.com.doors.ctrlt.controller;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,16 +21,16 @@ public class EspecialistaController {
 	}
 	
 	@RequestMapping("CadastrandoEspecialista")
-	public String caminhoCadastro(HttpSession session, Long id) {
+	public String caminhoCadastro(Model session, Long id) {
 		if (id != null) {			
-			session.setAttribute("alterando", espDAO.procurar(id));
+			session.addAttribute("alterando", espDAO.procurar(id));
 		}
 		return "CadastroEspecialista";
 	}
 	
 	@RequestMapping("ListandoEspecialista")
-	private String listar(HttpSession session) {
-		session.setAttribute("lista", espDAO.listarTodos());
+	private String listar(Model session) {
+		session.addAttribute("lista", espDAO.listarTodos());
 		return "ListarEspecialista";
 	}
 	@RequestMapping("ExcluirEspecialista")
@@ -41,7 +40,7 @@ public class EspecialistaController {
 	}
 	
 	@RequestMapping("CadastroEspecialista")
-	public String cadastro(HttpSession session, Especialista especialista, MultipartFile arquivo, Boolean licenca) {
+	public String cadastro(Model session, Especialista especialista, MultipartFile arquivo, Boolean licenca) {
 		if (!arquivo.isEmpty()) {
 			try {
 				especialista.setFotoEspecialista(arquivo.getBytes());

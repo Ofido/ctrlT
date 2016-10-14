@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +18,6 @@ import br.com.doors.ctrlt.dao.ProfessorDAO;
 import br.com.doors.ctrlt.dao.QuestaoDAO;
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
-import br.com.doors.ctrlt.model.Especialista;
-import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Questao;
 
 @Controller
@@ -42,7 +38,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastrandoQuestao")
-	public String caminhoCadastro(HttpSession session, Model modelo, Long id) {
+	public String caminhoCadastro(Model modelo, Long id) {
 		List<Disciplina>disciplinas = null;
 		List<Assunto>assuntos = null;
 		if (id != null) {			
@@ -82,8 +78,8 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("ListandoQuestao")
-	private String listar(HttpSession session) {
-		session.setAttribute("lista", questaoDAO.listarTodos());
+	private String listar(Model session) {
+		session.addAttribute("lista", questaoDAO.listarTodos());
 		return "ListarQuestao";
 	}
 
@@ -94,7 +90,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(HttpSession session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo) {
+	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);

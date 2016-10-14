@@ -3,8 +3,6 @@ package br.com.doors.ctrlt.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +25,12 @@ public class AssuntoController {
 	}
 	
 	@RequestMapping("CadastrandoAssunto")
-	public String caminhoCadastro(HttpSession session, Long id) {
+	public String caminhoCadastro(Model session, Long id) {
 		List<Disciplina>disciplinas = null;
 		if (id != null) {			
 			disciplinas = new ArrayList<Disciplina>();
 			Assunto assunto = assuntoDAO.procurar(id);
-			session.setAttribute("alterando", assunto);
+			session.addAttribute("alterando", assunto);
 			disciplinas.add(assunto.getDisciplinaAssunto());
 			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
 				if (disciplina.getIdDisciplina() != assunto.getDisciplinaAssunto().getIdDisciplina()) {
@@ -43,13 +41,13 @@ public class AssuntoController {
 		if (disciplinas == null) {
 			disciplinas = disciplinasDAO.listarTodos();
 		}
-		session.setAttribute("disciplinas", disciplinas);
+		session.addAttribute("disciplinas", disciplinas);
 		return "CadastroAssunto";
 	}
 	
 	@RequestMapping("ListandoAssunto")
-	private String listar(HttpSession session) {
-		session.setAttribute("lista", assuntoDAO.listarTodos());
+	private String listar(Model session) {
+		session.addAttribute("lista", assuntoDAO.listarTodos());
 		return "ListarAssunto";
 	}
 	
@@ -60,7 +58,7 @@ public class AssuntoController {
 	}
 	
 	@RequestMapping("CadastroAssunto")
-	public String cadastro(HttpSession session, Assunto assunto, Disciplina disciplina) {
+	public String cadastro(Model session, Assunto assunto, Disciplina disciplina) {
 		assunto.setDisciplinaAssunto(disciplina);
 		if (assunto.getIdAssunto() == null) {			
 			assuntoDAO.incluir(assunto);

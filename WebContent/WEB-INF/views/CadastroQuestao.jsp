@@ -9,16 +9,41 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://code.google.com/p/jquery-cascade"></script>
 <script type="text/javascript">
-	function consultaDisciplinas() {
-		// Recupera o id da ta de selects de Assunto
-		var idDisciplina = document.getElementById("idDisciplina");
-		// Recupera o nome do valor selecionado na lista de Disciplina
-		var selectedValue = idDisciplina.options[idDisciplina.selectedIndex].value;
-		// Insere a disciplina selecionada em outro form para enviá-la e compará-la no banco de dados
-		var aux = document.getElementById("aux");
-		aux.value = selectedValue;
-		document.getElementById("botao").click();
 
+	/* FAZ A CONSULTA DOS ASSUNTOS QUE PERTENCEM A CADA DISCIPLINA */
+	function consultaAssuntos(assuntosIds) {
+		var selectBoxDisciplina = document.getElementById("selectBoxDisciplina");
+		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
+		var selectBoxAuxiliar;
+		var increment = 0;
+		
+		alert(selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].text + "com ID de : " + selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value);
+		alert(assuntosIds);
+
+		/* ADICIONAR ELEMENTOS */
+		  for (i = 0; i < selectBoxAssunto.length; i++) {
+			  //alert("Id da Disciplina: " + selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value + "Id do AssuntoDisciplina: " + assuntosIds[i-1] + "Id da Assunto: " + selectBoxAssunto.options[i].value);
+				
+			  if (selectBoxAssunto.options[i].value ==  'Selecione um Assunto'){
+				
+			     } else {
+			    	
+			if (selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value == assuntosIds[i-1]) {
+				alert("entrou no if true "+selectBoxAssunto.options[i].value);
+				selectBoxAssunto.options[i].style="display: inline;"
+			}else{
+				alert("entrou no if false "+selectBoxAssunto.options[i].value);
+				selectBoxAssunto.options[i].style="display: none;"
+			}
+			}
+
+		} 
+		increment = null;
+	}
+
+	function teste(){
+		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
+		selectBoxAssunto.options[0].selected="selected";
 	}
 
 	function verifica() {
@@ -57,7 +82,7 @@
 			value="${alterando.questao }"></br> </br>
 		<!-- TODO MUDAR PARA TEXT AREA -->
 		<label>Disciplina</label><select name="idDisciplina"
-			id="idDisciplina" ><!-- onchange="consultaDisciplinas();" TODO -->
+			id="idDisciplina" onchange="consultaAssuntos(${assunto});teste();">
 			<option value="0">Selecione uma disciplina</option>
 			<c:forEach items="${disciplinas}" var="disc">
 				<c:if

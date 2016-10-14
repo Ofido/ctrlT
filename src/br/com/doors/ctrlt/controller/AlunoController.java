@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,16 +24,16 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("CadastrandoAluno")
-	public String caminhoCadastro(HttpSession session, Long id) {
+	public String caminhoCadastro(Model session, Long id) {
 		if (id != null) {			
-			session.setAttribute("alterando", alunoDAO.procurar(id));
+			session.addAttribute("alterando", alunoDAO.procurar(id));
 		}
 		return "CadastroAluno";
 	}
 	
 	@RequestMapping("ListandoAluno")
-	private String listar(HttpSession session) {
-		session.setAttribute("lista", alunoDAO.listarTodos());
+	private String listar(Model session) {
+		session.addAttribute("lista", alunoDAO.listarTodos());
 		return "ListarAluno";
 	}
 	@RequestMapping("ExcluirAluno")
@@ -42,9 +43,7 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("CadastroAluno")
-	public String cadastro(HttpSession session, Aluno aluno, MultipartFile ft, String aniversario) {
-		System.out.println("aqui");
-		System.out.println(aniversario);
+	public String cadastro(Aluno aluno, MultipartFile ft, String aniversario) {
 		Calendar calendar = Calendar.getInstance();
 		String[] strings = aniversario.split("-");
 		calendar.set(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));

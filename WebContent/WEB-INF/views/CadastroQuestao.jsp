@@ -82,7 +82,7 @@
 			value="${alterando.questao }"></br> </br>
 		<!-- TODO MUDAR PARA TEXT AREA -->
 		<label>Disciplina</label><select name="idDisciplina"
-			id="idDisciplina" onchange="consultaAssuntos(${assunto});teste();">
+			id="selectBoxDisciplina" onchange="consultaAssuntos(${assunto});teste();">
 			<option value="0">Selecione uma disciplina</option>
 			<c:forEach items="${disciplinas}" var="disc">
 				<c:if
@@ -94,7 +94,7 @@
 					<option value="${disc.idDisciplina}">${disc.nomeDisciplina}</option>
 				</c:if>
 			</c:forEach>
-		</select></br> <label>Assunto</label> <select id="idAssunto" name="idAssunto">
+		</select></br> <label>Assunto</label> <select id="selectBoxAssunto" name="idAssunto">
 			<option value="0">Selecione um Assunto</option>
 			<c:forEach items="${assunto}" var="a">
 				<option value="${a.idAssunto}">${a.nomeAssunto}</option>

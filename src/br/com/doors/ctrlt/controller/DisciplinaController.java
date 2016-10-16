@@ -1,9 +1,8 @@
 package br.com.doors.ctrlt.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.doors.ctrlt.dao.DisciplinaDAO;
@@ -19,16 +18,15 @@ public class DisciplinaController {
 	}
 	
 	@RequestMapping("CadastrandoDisciplina")
-	public String caminhoCadastro(HttpSession session, Long id) {
+	public String caminhoCadastro(Model session, Long id) {
 		if (id != null) {			
-			session.setAttribute("alterando", disciplinaDAO.procurar(id));
+			session.addAttribute("alterando", disciplinaDAO.procurar(id));
 		}
 		return "CadastroDisciplina";
 	}
 	
-	@RequestMapping("ListandoDisciplina")
-	private String listar(HttpSession session) {
-		session.setAttribute("lista", disciplinaDAO.listarTodos());
+	private String listar(Model session) {
+		session.addAttribute("lista", disciplinaDAO.listarTodos());
 		return "ListarDisciplina";
 	}
 	@RequestMapping("ExcluirDisciplina")
@@ -38,7 +36,7 @@ public class DisciplinaController {
 	}
 	
 	@RequestMapping("CadastroDisciplina")
-	public String cadastro(HttpSession session, Disciplina disciplina) {
+	public String cadastro(Model session, Disciplina disciplina) {
 		if (disciplina.getIdDisciplina() == null) {			
 			disciplinaDAO.incluir(disciplina);
 		}else {

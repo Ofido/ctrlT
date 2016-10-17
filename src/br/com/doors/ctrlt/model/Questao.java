@@ -12,7 +12,7 @@ public class Questao {
 	private Assunto assuntoQuestao; //TODO ADD NO BANCO
 	private Professor criadorQuestao;
 	private Especialista validadorQuestao;
-	private Resposta[] respostasQuestao;
+	private Resposta[] respostasQuestao;// TODO MUDAR VETORES PARA LISTA
 	private Integer ratingAlunoQuestao;
 	private Integer ratingProfessorQuestao;
 	private Integer nivelQuestao;

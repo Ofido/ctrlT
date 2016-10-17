@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Turma {
 	private Long idTurma;
-	private Aluno[] alunosTurma;
+	private Aluno[] alunosTurma;// TODO MUDAR VETORES PARA LISTA
 	private Professor regenteTurma;
-	private Professor[] professoresTurma;
+	private Professor[] professoresTurma;// TODO MUDAR VETORES PARA LISTA
 	private String nomeTurma;
 	public Long getIdTurma() {
 		return idTurma;

@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class Prova {
 	private Long id;
-	private Questao[] questoes;
+	private Questao[] questoes;// TODO MUDAR VETORES PARA LISTA
 	private Professor professor;
 	private Turma turma;//TODO alunos que farão a prova
 	private TipoProva tipoProva;

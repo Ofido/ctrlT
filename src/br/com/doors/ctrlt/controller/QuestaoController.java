@@ -113,7 +113,7 @@ public class QuestaoController {
 		if (tipoCadastro.contains("CadastroComum")) {
 			return "index";
 		}else{
-			return "redirect:CadastrandoAlternativa";
+			return "redirect:CadastrandoResposta";
 		}
 		
 	}

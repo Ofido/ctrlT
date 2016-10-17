@@ -6,7 +6,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 public class Resposta {
 	private Long idResposta;
-	private String rsposta;
+	private String resposta;
 	private byte[] complementoResposta;
 	private Boolean corretaResposta;
 	
@@ -16,11 +16,11 @@ public class Resposta {
 	public void setIdResposta(Long idResposta) {
 		this.idResposta = idResposta;
 	}
-	public String getRsposta() {
-		return rsposta;
+	public String getResposta() {
+		return resposta;
 	}
-	public void setRsposta(String rsposta) {
-		this.rsposta = rsposta;
+	public void setResposta(String rsposta) {
+		this.resposta = rsposta;
 	}
 	public byte[] getComplementoResposta() {
 		return complementoResposta;
@@ -41,7 +41,7 @@ public class Resposta {
 	
 	@Override
 	public String toString() {
-		return "Resposta [idResposta=" + idResposta + ", rsposta=" + rsposta
+		return "Resposta [idResposta=" + idResposta + ", rsposta=" + resposta
 				+ ", complementoResposta="
 				+ Arrays.toString(complementoResposta) + ", corretaResposta="
 				+ corretaResposta + "]";

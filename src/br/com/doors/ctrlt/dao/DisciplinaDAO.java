@@ -79,7 +79,6 @@ public class DisciplinaDAO implements InterfaceDisciplinaDAO {
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(EXCLUIR);
 			stmt.setLong(1, id);
-			
 			stmt.execute();
 			stmt.close();
 		} catch (SQLException e) {

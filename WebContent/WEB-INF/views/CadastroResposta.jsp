@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Formulário Alternativas</title>
+<title>Formulário Respostas</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
@@ -67,7 +67,7 @@
 </script>
 </head>
 <body>
-	<form id="target" action="alternativasAdiciona">
+	<form id="target" action="respostasAdiciona">
 		<div class="input_fields_wrap">
 			<div>
 

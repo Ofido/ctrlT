@@ -65,6 +65,6 @@ public class AssuntoController {
 		}else {
 			assuntoDAO.alterar(assunto);
 		}
-		return "Index";
+		return "index";
 	}
 }

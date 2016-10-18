@@ -85,8 +85,6 @@ public class QuestaoController {
 	
 	@RequestMapping("CadastroQuestao")
 	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro) {
-		System.out.println(tipoCadastro);
-		System.out.println("AQUI");
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
@@ -97,7 +95,7 @@ public class QuestaoController {
 				throw new RuntimeException("ERRO NA FOTO"+ this.getClass() + e.toString());
 			}
 		}
-		questao.setCriadorQuestao(professorDAO.procurar(11L));//TODO arrumar
+		questao.setCriadorQuestao(professorDAO.procurar(12L));//TODO arrumar
 		questao.setValidadorQuestao(especialistaDAO.procurar(1L));//TODO arrumar
 		questao.setDisciplinaQuestao(disciplina);
 		questao.setAssuntoQuestao(assunto);
@@ -106,10 +104,10 @@ public class QuestaoController {
 		}else {
 			questaoDAO.alterar(questao);
 		}
-		if (tipoCadastro.contains("CadastroComum")) {
+		if (tipoCadastro.contains("CadastroComum")) {//TODO FAZER ISSO FUNCIONAR
 			return "index";
 		}else{
-			return "redirect:CadastrandoResposta";
+			return "redirect:CadastrandoResposta?idQuestao:" + questao.getIdQuestao().toString();
 		}
 		
 	}

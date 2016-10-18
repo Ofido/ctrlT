@@ -1,7 +1,7 @@
 package br.com.doors.ctrlt.model;
 
 public enum TipoQuestao {
-	UNICA(1), DISSERTATIVA(2), VERDADEIROFALSO(3), MULTIPLA(4);
+	UNICA(0), DISSERTATIVA(1), VERDADEIROFALSO(2), MULTIPLA(3);
 
 	private final double _tipoQuestao;
 

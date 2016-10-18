@@ -23,13 +23,13 @@ import br.com.doors.ctrlt.model.TipoQuestao;
 
 @Repository
 public class QuestaoDAO implements InterfaceQuestaoDAO {
-	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, tempoQuestao, "
-			+ "nivelQuestao, questao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, idAssunto, tempoQuestao, "
+			+ "nivelQuestao, questao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.questao where idQuestao=?";
-	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, idProfessor=?, idEspecialista=?, tempoQuestao=?, "
+	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, idProfessor=?, idEspecialista=?, idAssunto=?,tempoQuestao=?, "
 			+ "nivelQuestao=?, questao=?, validadaQuestao=?, comentario=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
-	private static final String LISTAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista";
-	private static final String PROCURAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista and idquestao=?";
+	private static final String LISTAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.assunto, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idAssunto=ctrlt.assunto.idAssunto and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista";
+	private static final String PROCURAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.assunto, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idAssunto=ctrlt.assunto.idAssunto and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista and idquestao=?";
 	
 	private static Connection CONEXAO;
 	
@@ -52,17 +52,18 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(1, t.getDisciplinaQuestao().getIdDisciplina());
 			stmt.setLong(2, t.getCriadorQuestao().getIdProfessor());
 			stmt.setLong(3, t.getValidadorQuestao().getIdEspecialista());
-			stmt.setLong(4, t.getTempoQuestao().getTimeInMillis());
-			stmt.setLong(5, t.getNivelQuestao());
-			stmt.setString(6, t.getQuestao());
+			stmt.setLong(4, t.getAssuntoQuestao().getIdAssunto());
+			stmt.setLong(5, t.getTempoQuestao().getTimeInMillis());
+			stmt.setLong(6, t.getNivelQuestao());
+			stmt.setString(7, t.getQuestao());
 			//TODO POR ULTIMO USO QUESTAO AQUI
-			stmt.setBoolean(7, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
-			stmt.setString(8, t.getComentario());
-			stmt.setInt(9, t.getTipoQuestao().ordinal());
-			stmt.setBlob(10, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(11, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(12, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setBoolean(8, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setString(9, t.getComentario());
+			stmt.setInt(10, t.getTipoQuestao().ordinal());
+			stmt.setBlob(11, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
+			stmt.setLong(12, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			stmt.setInt(13, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -86,18 +87,19 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(1, t.getDisciplinaQuestao().getIdDisciplina());
 			stmt.setLong(2, t.getCriadorQuestao().getIdProfessor());
 			stmt.setLong(3, t.getValidadorQuestao().getIdEspecialista());
-			stmt.setLong(4, t.getTempoQuestao().getTimeInMillis());
-			stmt.setLong(5, t.getNivelQuestao());
-			stmt.setString(6, t.getQuestao());
+			stmt.setLong(4, t.getAssuntoQuestao().getIdAssunto());
+			stmt.setLong(5, t.getTempoQuestao().getTimeInMillis());
+			stmt.setLong(6, t.getNivelQuestao());
+			stmt.setString(7, t.getQuestao());
 			//TODO POR ULTIMO USO QUESTAO AQUI
-			stmt.setBoolean(7, t.getValidadaQuestao());
-			stmt.setString(8, t.getComentario());
-			stmt.setInt(9, t.getTipoQuestao().ordinal());
-			stmt.setBlob(10, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(11, t.getUsoQuestao());
-			stmt.setInt(12, t.getRatingAlunoQuestao());
-			stmt.setInt(13, t.getRatingProfessorQuestao());
-			stmt.setLong(14, t.getIdQuestao());
+			stmt.setBoolean(8, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setString(9, t.getComentario());
+			stmt.setInt(10, t.getTipoQuestao().ordinal());
+			stmt.setBlob(11, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
+			stmt.setLong(12, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(13, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setLong(15, t.getIdQuestao());
 			
 			stmt.execute();
 			stmt.close();
@@ -150,7 +152,6 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				Assunto assunto = new Assunto();
 				assunto.setIdAssunto(rs.getLong("idassunto"));
 				assunto.setNomeAssunto(rs.getString("nomeassunto"));
-				assunto.setDisciplinaAssunto(disciplina);
 				
 				Professor professor = new Professor();
 				professor.setIdProfessor(rs.getLong("idprofessor"));
@@ -176,6 +177,8 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				Calendar tempoQuestao = Calendar.getInstance();
 				tempoQuestao.setTimeInMillis(rs.getLong("tempoQuestao"));
 				
+				assunto.setDisciplinaAssunto(disciplina);
+				questao.setDisciplinaQuestao(disciplina);
 				questao.setDisciplinaQuestao(disciplina);
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);
@@ -212,6 +215,10 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				disciplina.setIdDisciplina(rs.getLong("idDisciplina"));
 				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
 				
+				Assunto assunto = new Assunto();
+				assunto.setIdAssunto(rs.getLong("idassunto"));
+				assunto.setNomeAssunto(rs.getString("nomeassunto"));
+				
 				Professor professor = new Professor();
 				professor.setIdProfessor(rs.getLong("idprofessor"));
 				professor.setNomeProfessor(rs.getString("nomeprofessor"));
@@ -223,7 +230,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				professor.setTagProfessor(rs.getString("tagProfessor"));
 				professor.setTelefoneProfessor(rs.getString("telefoneProfessor"));
 				professor.setFotoProfessor(rs.getBytes("fotoProfessor"));
-
+				//TODO AQUI
 				Especialista especialista = new Especialista();
 				especialista.setIdEspecialista(rs.getLong("idespecialista"));
 				especialista.setNomeEspecialista(rs.getString("nomeespecialista"));
@@ -236,12 +243,14 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				Calendar tempoQuestao = Calendar.getInstance();
 				tempoQuestao.setTimeInMillis(rs.getLong("tempoQuestao"));
 				
-				Questao questao = new Questao();				
-				questao.setIdQuestao(rs.getLong("idQuestao"));
+				assunto.setDisciplinaAssunto(disciplina);
+				Questao questao = new Questao();
+				questao.setDisciplinaQuestao(disciplina);
 				questao.setDisciplinaQuestao(disciplina);
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);
 				questao.setTempoQuestao(tempoQuestao);
+				questao.setIdQuestao(rs.getLong("idQuestao"));
 				questao.setNivelQuestao(rs.getInt("nivelQuestao"));
 				questao.setQuestao(rs.getString("questao"));
 				questao.setValidadaQuestao(rs.getBoolean("validadaQuestao"));

@@ -1,12 +1,13 @@
 package br.com.doors.ctrlt.model;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class Turma {
 	private Long idTurma;
-	private Aluno[] alunosTurma;// TODO MUDAR VETORES PARA LISTA
+	private List<Aluno> alunosTurma;
 	private Professor regenteTurma;
-	private Professor[] professoresTurma;// TODO MUDAR VETORES PARA LISTA
+	private List<Professor> professoresTurma;
 	private String nomeTurma;
 	public Long getIdTurma() {
 		return idTurma;
@@ -14,23 +15,11 @@ public class Turma {
 	public void setIdTurma(Long idTurma) {
 		this.idTurma = idTurma;
 	}
-	public Aluno[] getAlunosTurma() {
-		return alunosTurma;
-	}
-	public void setAlunosTurma(Aluno[] alunosTurma) {
-		this.alunosTurma = alunosTurma;
-	}
 	public Professor getRegenteTurma() {
 		return regenteTurma;
 	}
 	public void setRegenteTurma(Professor regenteTurma) {
 		this.regenteTurma = regenteTurma;
-	}
-	public Professor[] getProfessoresTurma() {
-		return professoresTurma;
-	}
-	public void setProfessoresTurma(Professor[] professoresTurma) {
-		this.professoresTurma = professoresTurma;
 	}
 	public String getNomeTurma() {
 		return nomeTurma;
@@ -38,12 +27,22 @@ public class Turma {
 	public void setNomeTurma(String nomeTurma) {
 		this.nomeTurma = nomeTurma;
 	}
+	public List<Aluno> getAlunosTurma() {
+		return alunosTurma;
+	}
+	public void setAlunosTurma(List<Aluno> alunosTurma) {
+		this.alunosTurma = alunosTurma;
+	}
+	public List<Professor> getProfessoresTurma() {
+		return professoresTurma;
+	}
+	public void setProfessoresTurma(List<Professor> professoresTurma) {
+		this.professoresTurma = professoresTurma;
+	}
 	@Override
 	public String toString() {
-		return "Turma [idTurma=" + idTurma + ", alunosTurma="
-				+ Arrays.toString(alunosTurma) + ", regenteTurma="
-				+ regenteTurma + ", professoresTurma="
-				+ Arrays.toString(professoresTurma) + ", nomeTurma="
-				+ nomeTurma + "]";
+		return "Turma [idTurma=" + idTurma + ", alunosTurma=" + alunosTurma
+				+ ", regenteTurma=" + regenteTurma + ", professoresTurma="
+				+ professoresTurma + ", nomeTurma=" + nomeTurma + "]";
 	}
 }

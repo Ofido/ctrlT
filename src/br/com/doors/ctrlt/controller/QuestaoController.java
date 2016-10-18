@@ -71,12 +71,6 @@ public class QuestaoController {
 		return "CadastroQuestao";
 	}
 	
-	@RequestMapping("consultarAssunto")
-	private String consultar(Model modelo, Long id) {
-		modelo.addAttribute("assunto", assuntoDAO.procurarDisciplina(id)); // TODO FAZER ESSE METODO FUNCIONAR
-		return "CadastroQuestao";
-	}
-	
 	@RequestMapping("ListandoQuestao")
 	private String listar(Model session) {
 		session.addAttribute("lista", questaoDAO.listarTodos());

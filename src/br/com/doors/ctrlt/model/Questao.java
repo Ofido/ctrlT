@@ -2,6 +2,7 @@ package br.com.doors.ctrlt.model;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
@@ -12,7 +13,7 @@ public class Questao {
 	private Assunto assuntoQuestao; //TODO ADD NO BANCO
 	private Professor criadorQuestao;
 	private Especialista validadorQuestao;
-	private Resposta[] respostasQuestao;// TODO MUDAR VETORES PARA LISTA
+	private List<Resposta> respostasQuestao;
 	private Integer ratingAlunoQuestao;
 	private Integer ratingProfessorQuestao;
 	private Integer nivelQuestao;
@@ -117,14 +118,6 @@ public class Questao {
 		return encodedImage;
 	}
 
-	public Resposta[] getRespostasQuestao() {
-		return respostasQuestao;
-	}
-
-	public void setRespostasQuestao(Resposta[] respostasQuestao) {
-		this.respostasQuestao = respostasQuestao;
-	}
-
 	public Integer getRatingAlunoQuestao() {
 		return ratingAlunoQuestao;
 	}
@@ -165,19 +158,30 @@ public class Questao {
 		this.ultimoUsoQuestao = ultimoUsoQuestao;
 	}
 
+	public List<Resposta> getRespostasQuestao() {
+		return respostasQuestao;
+	}
+
+	public void setRespostasQuestao(List<Resposta> respostasQuestao) {
+		this.respostasQuestao = respostasQuestao;
+	}
+
 	@Override
 	public String toString() {
 		return "Questao [idQuestao=" + idQuestao + ", tipoQuestao="
-				+ tipoQuestao.name() + ", disciplinaQuestao=" + disciplinaQuestao
+				+ tipoQuestao + ", disciplinaQuestao=" + disciplinaQuestao
 				+ ", assuntoQuestao=" + assuntoQuestao + ", criadorQuestao="
 				+ criadorQuestao + ", validadorQuestao=" + validadorQuestao
-				+ ", respostasQuestao=" + Arrays.toString(respostasQuestao)
+				+ ", respostasQuestao=" + respostasQuestao
 				+ ", ratingAlunoQuestao=" + ratingAlunoQuestao
 				+ ", ratingProfessorQuestao=" + ratingProfessorQuestao
-				+ ", nivelQuestao=" + nivelQuestao + ", questao=" + questao
-				+ ", tempoQuestao=" + tempoQuestao + ", ultimoUsoQuestao="
-				+ ultimoUsoQuestao + ", validadaQuestao=" + validadaQuestao
+				+ ", nivelQuestao=" + nivelQuestao + ", usoQuestao="
+				+ usoQuestao + ", questao=" + questao + ", comentario="
+				+ comentario + ", tempoQuestao=" + tempoQuestao
+				+ ", ultimoUsoQuestao=" + ultimoUsoQuestao
+				+ ", validadaQuestao=" + validadaQuestao
 				+ ", complementoQuestao=" + Arrays.toString(complementoQuestao)
 				+ "]";
 	}
+
 }

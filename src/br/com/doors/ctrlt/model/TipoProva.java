@@ -1,7 +1,7 @@
 package br.com.doors.ctrlt.model;
 
 public enum TipoProva {
-	OBJETIVA(1), DISSERTATIVA(2); // TODO PENSAR EM POR PROVA MISTA
+	OBJETIVA(1), DISSERTATIVA(2), MISTA(3);
 
 	private final double _tipoProva;
 

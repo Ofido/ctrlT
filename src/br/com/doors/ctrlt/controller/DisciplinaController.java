@@ -24,7 +24,7 @@ public class DisciplinaController {
 		}
 		return "CadastroDisciplina";
 	}
-	
+	@RequestMapping("ListandoDisciplina")
 	private String listar(Model session) {
 		session.addAttribute("lista", disciplinaDAO.listarTodos());
 		return "ListarDisciplina";

@@ -1,5 +1,7 @@
 package br.com.doors.ctrlt.dao;
 
+import java.util.List;
+
 import br.com.doors.ctrlt.model.Resposta;
 
 public interface InterfaceRespostaDAO extends InterfaceManter<Resposta>{
@@ -8,6 +10,6 @@ public interface InterfaceRespostaDAO extends InterfaceManter<Resposta>{
 
 	void alterar(Resposta t, Long idQuestao);
 
-	Resposta[] procurarQuestao(Long id);
+	List<Resposta> procurarQuestao(Long id);
 
 }

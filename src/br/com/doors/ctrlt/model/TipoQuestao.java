@@ -8,23 +8,20 @@ public enum TipoQuestao {
 	TipoQuestao(double tipoQuestao) {
 		_tipoQuestao = tipoQuestao;
 	}
+
 	public double tipoQuestao() {
 		return _tipoQuestao;
 	}
+
 	public static TipoQuestao tipo(int teste) {
 		switch (teste) {
 		case 1:
-			
 			return UNICA;
-
 		case 2:
-			
 			return DISSERTATIVA;
 		case 3:
-			
 			return VERDADEIROFALSO;
 		case 4:
-	
 			return MULTIPLA;
 		}
 		return null;

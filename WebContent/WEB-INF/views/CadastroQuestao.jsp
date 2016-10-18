@@ -6,11 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<script
+<!-- <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://code.google.com/p/jquery-cascade"></script>
+<script src="https://code.google.com/p/jquery-cascade"></script> -->
 <script type="text/javascript">
-
 	/* FAZ A CONSULTA DOS ASSUNTOS QUE PERTENCEM A CADA DISCIPLINA */
 	function consultaAssuntos(assuntosIds) {
 		var selectBoxDisciplina = document.getElementById("selectBoxDisciplina");
@@ -18,8 +17,8 @@
 		var selectBoxAuxiliar;
 		var increment = 0;
 		
-		alert(selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].text + "com ID de : " + selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value);
-		alert(assuntosIds);
+		//alert(selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].text + "com ID de : " + selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value);
+		//alert(assuntosIds);
 
 		/* ADICIONAR ELEMENTOS */
 		  for (i = 0; i < selectBoxAssunto.length; i++) {
@@ -30,10 +29,10 @@
 			     } else {
 			    	
 			if (selectBoxDisciplina.options[selectBoxDisciplina.selectedIndex].value == assuntosIds[i-1]) {
-				alert("entrou no if true "+selectBoxAssunto.options[i].value);
+				//alert("entrou no if true "+selectBoxAssunto.options[i].value);
 				selectBoxAssunto.options[i].style="display: inline;"
 			}else{
-				alert("entrou no if false "+selectBoxAssunto.options[i].value);
+				//alert("entrou no if false "+selectBoxAssunto.options[i].value);
 				selectBoxAssunto.options[i].style="display: none;"
 			}
 			}
@@ -69,10 +68,6 @@
 		}
 		return false;
 	}
-	function cadastro(aqui) {
-		alert(aqui);
-		document.getElementById("cadastro").value = aqui;
-	}
 </script>
 </head>
 <body>
@@ -106,30 +101,26 @@
 				<option value="${a.idAssunto}" style="display: none">${a.nomeAssunto}</option>
 			</c:forEach>
 		</select></br> <label>Tipo Questao:</label> <input type="radio" value="UNICA"
-			name="TipoQuestao">UNICA <input type="radio" value="DISSERTATIVA"
-			name="TipoQuestao">DISSERTATIVA <input type="radio"
-			value="VERDADEIROFALSO" name="TipoQuestao">VERDADEIROFALSO <input
-			type="radio" value="MULTIPLA" name="TipoQuestao">MULTIPLA <br />
-		<br /> <label>Dificuldade da questão: </label><br /> <input
-			type="radio" name="nivelQuestao" value="0" required />1 <input
-			type="radio" name="nivelQuestao" value="1" required />2 <input
-			type="radio" name="nivelQuestao" value="2" required />3 <input
-			type="radio" name="nivelQuestao" value="3" required />4 <input
-			type="radio" name="nivelQuestao" value="4" required />5 <input
-			type="radio" name="nivelQuestao" value="5" required />6 <input
-			type="radio" name="nivelQuestao" value="6" required />7 <input
-			type="radio" name="nivelQuestao" value="7" required />8 <input
-			type="radio" name="nivelQuestao" value="8" required />9 <input
-			type="radio" name="nivelQuestao" value="9" required />10<br />
-		<br />
-		<br /> <label>Tempo Questao: (min)</label> <input type="text"
-			name="tempo"><br />
-		<br />
+			name="TipoQuestao">UNICA <input type="radio"
+			value="DISSERTATIVA" name="TipoQuestao">DISSERTATIVA <input
+			type="radio" value="VERDADEIROFALSO" name="TipoQuestao">VERDADEIROFALSO
+		<input type="radio" value="MULTIPLA" name="TipoQuestao">MULTIPLA
+		<br /> <br /> <label>Dificuldade da questão: </label><br /> <input
+			type="radio" name="nivelQuestao" value="0" />1 <input type="radio"
+			name="nivelQuestao" value="1" />2 <input type="radio"
+			name="nivelQuestao" value="2" />3 <input type="radio"
+			name="nivelQuestao" value="3" />4 <input type="radio"
+			name="nivelQuestao" value="4" />5 <input type="radio"
+			name="nivelQuestao" value="5" />6 <input type="radio"
+			name="nivelQuestao" value="6" />7 <input type="radio"
+			name="nivelQuestao" value="7" />8 <input type="radio"
+			name="nivelQuestao" value="8" />9 <input type="radio"
+			name="nivelQuestao" value="9" />10<br /> <br /> <br /> <label>Tempo
+			Questao: (min)</label> <input type="text" name="tempo"><br /> <br />
 		<br /> <label>Complemento:</label> <input type="file" name="arquivo"
-			accept="image/*"></br>
-			<input type="hidden" name="tipoCadastro" id="cadastro">
-		</br> <input type="submit" value="CadastroComum" onblur="cadastro(CadastroComum);"><!-- SOMENTE PREMIUM -->
-			<input type="submit" value="CadastrarResposta" onblur="cadastro(CadastrarResposta);">
+			accept="image/*"></br> </br>
+			<input type="hidden" id="tipo" name="tipoCadastro">
+		<input type="submit" value="Continuar">
 	</form>
 </body>
 </html>

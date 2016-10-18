@@ -1,6 +1,5 @@
 package br.com.doors.ctrlt.model;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 

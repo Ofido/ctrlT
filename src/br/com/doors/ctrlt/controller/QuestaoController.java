@@ -85,6 +85,8 @@ public class QuestaoController {
 	
 	@RequestMapping("CadastroQuestao")
 	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro) {
+		System.out.println(tipoCadastro);
+		System.out.println("AQUI");
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);

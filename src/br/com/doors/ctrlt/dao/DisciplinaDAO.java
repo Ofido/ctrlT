@@ -28,7 +28,7 @@ public class DisciplinaDAO implements InterfaceDisciplinaDAO {
 	@Autowired
 	public DisciplinaDAO(DataSource ds) {
 		try{
-			CONEXAO = ds.getConnection();
+			this.CONEXAO = ds.getConnection();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

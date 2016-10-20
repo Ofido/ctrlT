@@ -44,9 +44,9 @@ public class RespostaController {
 			respostaDAO.alterar(resposta, idQuestao);
 		}
 		if (prox == 0) {			
-			return "index";
+			return "redrect:listaRespostaQuestao";
 		}else {
-			return "";//TODO FAZER RESPOSTA COMO PENSAMOS
+			return "redrect:CadastrandoResposta?id=null,idQuestao"+idQuestao.toString()0	;//TODO FAZER RESPOSTA COMO PENSAMOS
 		}
 	}
 }

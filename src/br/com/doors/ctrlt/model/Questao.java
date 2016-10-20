@@ -10,7 +10,7 @@ public class Questao {
 	private Long idQuestao;	
 	private TipoQuestao tipoQuestao;
 	private Disciplina disciplinaQuestao;
-	private Assunto assuntoQuestao; //TODO ADD NO BANCO
+	private Assunto assuntoQuestao;
 	private Professor criadorQuestao;
 	private Especialista validadorQuestao;
 	private List<Resposta> respostasQuestao;

@@ -19,7 +19,7 @@ public class RespostaController {
 	
 	@RequestMapping("CadastrandoResposta")
 	public String caminhoCadastro(Model session, Long id, Long idQuestao) {
-		session.addAttribute("quiestao", idQuestao);
+		session.addAttribute("questao", idQuestao);
 		if (id != null) {			
 			session.addAttribute("lista", respostaDAO.procurarQuestao(idQuestao));
 		}
@@ -37,12 +37,16 @@ public class RespostaController {
 	}
 	
 	@RequestMapping("CadastroResposta")
-	public String cadastro(Model session, Resposta resposta, Long idQuestao) {
-		if (resposta.getIdResposta() == null) {			
+	public String cadastro(Model session, Resposta resposta, Long idQuestao, int prox) {
+		if (resposta.getIdResposta() == null) {		
 			respostaDAO.incluir(resposta, idQuestao);
 		}else {
 			respostaDAO.alterar(resposta, idQuestao);
 		}
-		return "index";
+		if (prox == 0) {			
+			return "index";
+		}else {
+			return "";//TODO FAZER RESPOSTA COMO PENSAMOS
+		}
 	}
 }

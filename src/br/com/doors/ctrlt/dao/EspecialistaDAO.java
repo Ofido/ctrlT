@@ -164,7 +164,7 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 			return null;
 		}
 		try {
-			PreparedStatement stmt = this.CONEXAO.prepareStatement(LOGIN);
+			PreparedStatement stmt = CONEXAO.prepareStatement(LOGIN);
 			
 			stmt.setString(1, email);
 			stmt.setString(2, senha);

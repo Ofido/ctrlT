@@ -24,10 +24,10 @@ import br.com.doors.ctrlt.model.TipoQuestao;
 @Repository
 public class QuestaoDAO implements InterfaceQuestaoDAO {
 	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, idAssunto, tempoQuestao, "
-			+ "nivelQuestao, questao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "nivelQuestao, questao, ultimoUsoQuestao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.questao where idQuestao=?";
 	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, idProfessor=?, idEspecialista=?, idAssunto=?,tempoQuestao=?, "
-			+ "nivelQuestao=?, questao=?, validadaQuestao=?, comentario=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
+			+ "nivelQuestao=?, questao=?, ultimoUsoQuestao=?, validadaQuestao=?, comentario=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
 	private static final String LISTAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.assunto, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idAssunto=ctrlt.assunto.idAssunto and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista";
 	private static final String PROCURAR = "SELECT * FROM ctrlt.questao, ctrlt.disciplina, ctrlt.assunto, ctrlt.professor, ctrlt.especialista WHERE ctrlt.questao.idDisciplina = ctrlt.disciplina.idDisciplina and ctrlt.questao.idProfessor = ctrlt.professor.idProfessor and ctrlt.questao.idAssunto=ctrlt.assunto.idAssunto and ctrlt.questao.idEspecialista = ctrlt.especialista.idEspecialista and idquestao=?";
 	
@@ -56,14 +56,14 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(5, t.getTempoQuestao().getTimeInMillis());
 			stmt.setLong(6, t.getNivelQuestao());
 			stmt.setString(7, t.getQuestao());
-			//TODO POR ULTIMO USO QUESTAO AQUI
-			stmt.setBoolean(8, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
-			stmt.setString(9, t.getComentario());
-			stmt.setInt(10, t.getTipoQuestao().ordinal());
-			stmt.setBlob(11, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(12, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(13, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setLong(8, t.getUltimoUsoQuestao().getTimeInMillis());
+			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setString(10, t.getComentario());
+			stmt.setInt(11, t.getTipoQuestao().ordinal());
+			stmt.setBlob(12, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
+			stmt.setLong(13, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setInt(15, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -91,15 +91,15 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(5, t.getTempoQuestao().getTimeInMillis());
 			stmt.setLong(6, t.getNivelQuestao());
 			stmt.setString(7, t.getQuestao());
-			//TODO POR ULTIMO USO QUESTAO AQUI
-			stmt.setBoolean(8, false);//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
-			stmt.setString(9, t.getComentario());
-			stmt.setInt(10, t.getTipoQuestao().ordinal());
-			stmt.setBlob(11, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(12, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(13, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setLong(8, t.getUltimoUsoQuestao().getTimeInMillis());
+			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setString(10, t.getComentario());
+			stmt.setInt(11, t.getTipoQuestao().ordinal());
+			stmt.setBlob(12, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
+			stmt.setLong(13, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setLong(15, t.getIdQuestao());
+			stmt.setInt(15, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setLong(16, t.getIdQuestao());
 			
 			stmt.execute();
 			stmt.close();
@@ -150,14 +150,14 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				disciplina.setNomeDisciplina(rs.getString("nomeDisciplina"));
 				
 				Assunto assunto = new Assunto();
-				assunto.setIdAssunto(rs.getLong("idassunto"));
-				assunto.setNomeAssunto(rs.getString("nomeassunto"));
+				assunto.setIdAssunto(rs.getLong("idAssunto"));
+				assunto.setNomeAssunto(rs.getString("nomeAssunto"));
 				
 				Professor professor = new Professor();
-				professor.setIdProfessor(rs.getLong("idprofessor"));
-				professor.setNomeProfessor(rs.getString("nomeprofessor"));
-				professor.setEmailProfessor(rs.getString("emailprofessor"));
-				professor.setSenhaProfessor(rs.getString("senhaprofessor"));
+				professor.setIdProfessor(rs.getLong("idProfessor"));
+				professor.setNomeProfessor(rs.getString("nomeProfessor"));
+				professor.setEmailProfessor(rs.getString("emailProfessor"));
+				professor.setSenhaProfessor(rs.getString("senhaProfessor"));
 				professor.setCpfProfessor(rs.getString("cpfProfessor"));
 				professor.setLicenca((rs.getInt("licencaProfessor")==1?true:false));
 				professor.setEscolaProfessor(rs.getString("escolaProfessor"));
@@ -230,7 +230,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				professor.setTagProfessor(rs.getString("tagProfessor"));
 				professor.setTelefoneProfessor(rs.getString("telefoneProfessor"));
 				professor.setFotoProfessor(rs.getBytes("fotoProfessor"));
-				//TODO AQUI
+				
 				Especialista especialista = new Especialista();
 				especialista.setIdEspecialista(rs.getLong("idespecialista"));
 				especialista.setNomeEspecialista(rs.getString("nomeespecialista"));
@@ -243,13 +243,18 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				Calendar tempoQuestao = Calendar.getInstance();
 				tempoQuestao.setTimeInMillis(rs.getLong("tempoQuestao"));
 				
+				Calendar ultimoUsoQuestao = Calendar.getInstance();
+				ultimoUsoQuestao.setTimeInMillis((rs.getLong("ultimoUsoQuestao")));
+				
 				assunto.setDisciplinaAssunto(disciplina);
 				Questao questao = new Questao();
+				questao.setAssuntoQuestao(assunto);
 				questao.setDisciplinaQuestao(disciplina);
 				questao.setDisciplinaQuestao(disciplina);
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);
 				questao.setTempoQuestao(tempoQuestao);
+				questao.setUltimoUsoQuestao(ultimoUsoQuestao);
 				questao.setIdQuestao(rs.getLong("idQuestao"));
 				questao.setNivelQuestao(rs.getInt("nivelQuestao"));
 				questao.setQuestao(rs.getString("questao"));

@@ -71,7 +71,7 @@ public class QuestaoController {
 		return "CadastroQuestao";
 	}
 	
-	@RequestMapping("ListandoQuestao")
+	@RequestMapping("ListandoQuestao")		
 	private String listar(Model session) {
 		session.addAttribute("lista", questaoDAO.listarTodos());
 		return "ListarQuestao";
@@ -88,6 +88,9 @@ public class QuestaoController {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
+		Calendar aqui = Calendar.getInstance();
+		aqui.set(1995, 11, 20, 15, 55, 55);
+		questao.setUltimoUsoQuestao(aqui);
 		if (!arquivo.isEmpty()) {
 			try {
 				questao.setComplementoQuestao(arquivo.getBytes());

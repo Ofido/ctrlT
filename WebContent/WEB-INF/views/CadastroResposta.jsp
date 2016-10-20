@@ -68,6 +68,7 @@
 </head>
 <body>
 	<form id="target" action="respostasAdiciona">
+		<input type="hidden" name="idQuestao" value="${questao }">
 		<div class="input_fields_wrap">
 			<div>
 

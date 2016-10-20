@@ -15,13 +15,13 @@ public enum TipoQuestao {
 
 	public static TipoQuestao tipo(int teste) {
 		switch (teste) {
-		case 1:
+		case 0:
 			return UNICA;
-		case 2:
+		case 1:
 			return DISSERTATIVA;
-		case 3:
+		case 2:
 			return VERDADEIROFALSO;
-		case 4:
+		case 3:
 			return MULTIPLA;
 		}
 		return null;

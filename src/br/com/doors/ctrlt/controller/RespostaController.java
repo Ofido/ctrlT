@@ -1,5 +1,7 @@
 package br.com.doors.ctrlt.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,12 @@ public class RespostaController {
 	
 	@RequestMapping("CadastroResposta")
 	public String cadastro(Model session, Resposta resposta, Long idQuestao, int prox) {
-		if (resposta.getIdResposta() == null) {		
+		if (resposta.getCorretaResposta() == null) {
+			String[] respostas = resposta.getResposta().trim().split(",");
+			for (int i = 0; i < respostas.length; i++) {
+				respostaDAO.incluir(resposta, idQuestao);
+			}
+		}else if (resposta.getIdResposta() == null) {		
 			respostaDAO.incluir(resposta, idQuestao);
 		}else {
 			respostaDAO.alterar(resposta, idQuestao);
@@ -46,7 +53,7 @@ public class RespostaController {
 		if (prox == 0) {			
 			return "redrect:listaRespostaQuestao";
 		}else {
-			return "redrect:CadastrandoResposta?id=null,idQuestao"+idQuestao.toString()0	;//TODO FAZER RESPOSTA COMO PENSAMOS
+			return "redrect:CadastrandoResposta?id=null,idQuestao"+idQuestao.toString()	;//TODO FAZER RESPOSTA COMO PENSAMOS
 		}
 	}
 }

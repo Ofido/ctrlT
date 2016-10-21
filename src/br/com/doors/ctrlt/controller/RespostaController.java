@@ -69,10 +69,6 @@ public class RespostaController {
 		} else {
 			respostaDAO.alterar(resposta, idQuestao);
 		}	
-		return "redirect:ListandoResposta?idQuestao=" + idQuestao.toString();// TODO
-																				// FAZER
-																				// RESPOSTA
-																				// COMO
-		// PENSAMOS
+		return "redirect:ListandoResposta?idQuestao=" + idQuestao.toString();// TODO AQUI
 	}
 }

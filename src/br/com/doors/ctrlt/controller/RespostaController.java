@@ -13,47 +13,49 @@ import br.com.doors.ctrlt.model.Resposta;
 @Controller
 public class RespostaController {
 	private final RespostaDAO respostaDAO;
-	
+
 	@Autowired
-	public RespostaController(RespostaDAO daoP){
+	public RespostaController(RespostaDAO daoP) {
 		this.respostaDAO = daoP;
 	}
-	
+
 	@RequestMapping("CadastrandoResposta")
 	public String caminhoCadastro(Model session, Long id, Long idQuestao) {
 		session.addAttribute("questao", idQuestao);
-		if (id != null) {			
-			session.addAttribute("lista", respostaDAO.procurarQuestao(idQuestao));
+		if (id != null) {
+			session.addAttribute("lista",
+					respostaDAO.procurarQuestao(idQuestao));
 		}
 		return "CadastroResposta";
 	}
+
 	@RequestMapping("ListandoResposta")
 	private String listar(Model session, Long idQuestao) {
 		session.addAttribute("lista", respostaDAO.procurarQuestao(idQuestao));
 		return "ListarResposta";
 	}
+
 	@RequestMapping("ExcluirResposta")
 	private String excluir(Long id) {
 		respostaDAO.excluir(id);
 		return "redirect:ListandoResposta";
 	}
-	
+
 	@RequestMapping("CadastroResposta")
-	public String cadastro(Model session, Resposta resposta, Long idQuestao, int prox) {
+	public String cadastro(Model session, Resposta resposta, Long idQuestao) {
 		if (resposta.getCorretaResposta() == null) {
 			String[] respostas = resposta.getResposta().trim().split(",");
 			for (int i = 0; i < respostas.length; i++) {
+				Resposta a = new Resposta();
+				a.setResposta(respostas[i]);
 				respostaDAO.incluir(resposta, idQuestao);
 			}
-		}else if (resposta.getIdResposta() == null) {		
+		} else if (resposta.getIdResposta() == null) {
 			respostaDAO.incluir(resposta, idQuestao);
-		}else {
+		} else {
 			respostaDAO.alterar(resposta, idQuestao);
 		}
-		if (prox == 0) {			
-			return "redrect:listaRespostaQuestao";
-		}else {
-			return "redrect:CadastrandoResposta?id=null,idQuestao"+idQuestao.toString()	;//TODO FAZER RESPOSTA COMO PENSAMOS
-		}
+		return "redrect:listaRespostaQuestao";// TODO FAZER RESPOSTA COMO
+												// PENSAMOS
 	}
 }

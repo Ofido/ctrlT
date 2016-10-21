@@ -110,7 +110,7 @@ public class QuestaoController {
 		if (tipoCadastro.contains("CadastroComum")) {//TODO FAZER ISSO FUNCIONAR
 			return "index";
 		}else{
-			return "redirect:CadastrandoResposta?idQuestao:" + questao.getIdQuestao().toString();
+			return "redirect:CadastrandoResposta?id=&idQuestao=" + questao.getIdQuestao().toString();
 		}
 		
 	}

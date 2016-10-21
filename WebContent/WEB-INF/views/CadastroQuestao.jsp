@@ -78,12 +78,14 @@
 			value="${alterando.criadorQuestao.idProfessor }"> <input
 			type="hidden" name="idEspecialista"
 			value="${alterando.validadorQuestao.idEspecialista }"> <label
-			for="questao">Enunciado:</label> <input type="text" name="questao"
-			value="${alterando.questao }"></br> </br>
-		<!-- TODO MUDAR PARA TEXT AREA -->
-		<label>Disciplina</label><select name="idDisciplina"
-			id="selectBoxDisciplina"
-			onchange="consultaAssuntos(${assunto});teste();">
+			for="questao">
+		
+				Enunciado:</label> <input type="text" name="questao"
+				value="${alterando.questao }"></br> </br>
+			<!-- TODO MUDAR PARA TEXT AREA -->
+			<label>Disciplina</label><select name="idDisciplina"
+				id="selectBoxDisciplina"
+				onchange="consultaAssuntos(${assunto});teste();">
 			<option value="0">Selecione uma disciplina</option>
 			<c:forEach items="${disciplinas}" var="disc">
 				<c:if

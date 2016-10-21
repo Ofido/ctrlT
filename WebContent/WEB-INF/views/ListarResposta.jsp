@@ -7,6 +7,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Lista de Assuntos</title>
 </head>
+<script type="text/javascript">
+	function salvar(aq) {
+		document.getElementById("a"+aq).click();
+	}
+	function salvar2(aq) {
+		alert("aaaaa")
+		document.getElementById("b"+aq).click();
+	}
+</script>
 <body>
 <table border="2" bordercolor="RED">
 	<tr>
@@ -38,16 +47,36 @@
 				${p.idResposta }
 			</td>
 			<td>
-				${p.nomeAssunto }
+				<form action="CadastroResposta" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="idQuestao" value="${questao }">
+					<input type="hidden" name="idResposta" value="${p.idResposta }">
+					<input type="checkbox" name="corretaResposta" onclick="salvar(${p.idResposta })" <c:if test="${p.corretaResposta }">checked="checked"</c:if>>
+					<input type="hidden" name="alterandoCorreta" value="true">
+					<input type="submit" id="a${p.idResposta }" style="display: none;">
+				</form>
 			</td>
 			<td>
-				${p.disciplinaAssunto.nomeDisciplina }
+				<div style="width: 100px;">
+					${p.resposta}
+				</div>
 			</td>
 			<td>
-				<a href="ExcluirAssunto?id=${p.idAssunto }">Excluir</a>
+				<img src="data:image/*;base64, ${p.foto64 }">
 			</td>
 			<td>
-				<a href="CadastrandoAssunto?id=${p.idAssunto }">Alterar</a>
+				<form action="CadastroResposta" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="idQuestao" value="${questao }">
+					<input type="hidden" name="idResposta" value="${p.idResposta }">
+					<input type="file" onchange="salvar2(${p.idResposta })" name="arquivo" accept="image/*">
+					<input type="hidden" name="alterandoImg" value="true">
+					<input type="submit" id="b${p.idResposta }" style="display: none;">
+				</form>
+			</td>
+			<td>
+				<a href="ExcluirResposta?id=${p.idResposta }&idQuestao=${questao }">Excluir</a>
+			</td>
+			<td>
+				<a href="CadastrandoResposta?id=${p.idResposta }">Alterar</a>
 			</td>
 		</tr>
 	</c:forEach>

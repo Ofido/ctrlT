@@ -30,6 +30,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/ctrlt"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="root"></property>
+		<property name="MaxTotal" value="20"></property>
 	</bean>
 
 	<bean id="multipartResolver"

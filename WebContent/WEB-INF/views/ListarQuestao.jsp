@@ -53,6 +53,9 @@
 		<th>
 			ALTERA
 		</th>
+		<th>
+			ADD RESPOSTA
+		</th>
 	</tr>
 	<c:forEach items="${lista }" var="p">
 		<tr>
@@ -99,6 +102,9 @@
 			</td>
 			<td>
 				<a href="CadastrandoQuestao?id=${p.idQuestao }">Alterar</a>
+			</td>
+			<td>
+				<a href="ListandoResposta?idQuestao=${p.idQuestao }">Alterar</a>
 			</td>
 		</tr>
 	</c:forEach>

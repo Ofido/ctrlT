@@ -27,5 +27,4 @@ public class Assunto {
 	public String toString() {
 		return disciplinaAssunto.getIdDisciplina().toString();
 	}
-	
 }

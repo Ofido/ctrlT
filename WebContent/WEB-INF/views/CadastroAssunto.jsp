@@ -8,7 +8,7 @@
 <title>Cadastro de Assunto</title>
 </head>
 <body>
-<form action="CadastroAssunto" enctype="multipart/form-data" method="post">
+<form action="CadastroAssunto" enctype="multipart/form-data" method="get">
 <input type="hidden" name="idAssunto" value="${alterando.idAssunto }">
 <label for="nomeAssunto">nomeAssunto</label>
 <input type="text" name="nomeAssunto" value="${alterando.nomeAssunto }"></br></br>

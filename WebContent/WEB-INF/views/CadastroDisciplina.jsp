@@ -8,7 +8,7 @@
 <title>Cadastro de Disciplina</title>
 </head>
 <body>
-<form action="CadastroDisciplina" method="post">
+<form action="CadastroDisciplina" method="get">
 <input type="hidden" name="idDisciplina" value="${alterando.idDisciplina }">
 <label for="nomeDisciplina">nomeDisciplina</label>
 <input type="text" name="nomeDisciplina" value="${alterando.nomeDisciplina }"></br></br>

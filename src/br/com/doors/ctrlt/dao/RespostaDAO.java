@@ -45,11 +45,11 @@ public class RespostaDAO implements InterfaceRespostaDAO {
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(INCLUIR,
 					PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setBoolean(1, t.getCorretaResposta());
+			stmt.setBoolean(1, (t.getCorretaResposta()==null?false:t.getCorretaResposta()));
 			stmt.setLong(2, idQuestao);
 			stmt.setString(3, t.getResposta());
 			stmt.setBlob(4,
-					new ByteArrayInputStream(t.getComplementoResposta()));
+					(t.getComplementoResposta()==null?null:new ByteArrayInputStream(t.getComplementoResposta())));
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
@@ -86,7 +86,7 @@ public class RespostaDAO implements InterfaceRespostaDAO {
 			stmt.setLong(2, idQuestao);
 			stmt.setString(3, t.getResposta());
 			stmt.setBlob(4,
-					new ByteArrayInputStream(t.getComplementoResposta()));
+					(t.getComplementoResposta()==null?null:new ByteArrayInputStream(t.getComplementoResposta())));
 			stmt.setLong(5, t.getIdResposta());
 			stmt.execute();
 			stmt.close();

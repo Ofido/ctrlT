@@ -67,7 +67,7 @@
 </script>
 </head>
 <body>
-	<form id="target" action="respostasAdiciona">
+	<form id="target" action="CadastroResposta" enctype="multipart/form-data" method="post">
 		<input type="hidden" name="idQuestao" value="${questao }">
 		<div class="input_fields_wrap">
 			<div>

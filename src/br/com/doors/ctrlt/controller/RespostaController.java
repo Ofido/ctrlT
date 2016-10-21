@@ -1,7 +1,5 @@
 package br.com.doors.ctrlt.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +53,7 @@ public class RespostaController {
 		} else {
 			respostaDAO.alterar(resposta, idQuestao);
 		}
-		return "redrect:listaRespostaQuestao";// TODO FAZER RESPOSTA COMO
+		return "redrect:ListandoResposta";// TODO FAZER RESPOSTA COMO
 												// PENSAMOS
 	}
 }

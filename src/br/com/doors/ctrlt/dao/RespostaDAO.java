@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.doors.ctrlt.model.Resposta;
+import br.com.doors.ctrlt.model.Resposta;
 
 @Repository
 public class RespostaDAO implements InterfaceRespostaDAO {
@@ -67,6 +68,16 @@ public class RespostaDAO implements InterfaceRespostaDAO {
 		if (t == null) {
 			throw new RuntimeException("RESPOSTA NÃO PODE SER NULA"
 					+ this.getClass());
+		}
+		Resposta resposta = procurar(t.getIdResposta());
+		if (t.getResposta() == null || t.getResposta().isEmpty()) {
+			t.setResposta(resposta.getResposta());
+		}
+		if (t.getCorretaResposta() == null) {
+			t.setCorretaResposta(resposta.getCorretaResposta());
+		}
+		if (t.getComplementoResposta() == null || t.getFoto64().isEmpty()) {
+			t.setComplementoResposta(resposta.getComplementoResposta());
 		}
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(ALTERAR,

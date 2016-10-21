@@ -30,7 +30,7 @@
 												x++; //text box increment
 												$(wrapper)
 														.append(
-																'<div><input type="text" id="Texto1" name="textoAlternativa" placeholder="alternativa incorreta"/><a href="#" class="excluir">X</a></div>'); //add input box
+																'<div><input type="text" id="Texto1" name="resposta" placeholder="Respostas"/><a href="#" class="excluir">X</a></div>'); //add input box
 												//document.getElementById('Texto1').value = $('#Texto1').val();
 
 											}
@@ -73,8 +73,7 @@
 			<div>
 
 				<!-- PARAMOS AQUI (Texto1), necessita fazer salvar tudo em uma string separado por vírgula  -->
-				<input type="text" name="textoAlternativa"
-					placeholder="Alternativa Correta">
+				<input type="text" name="resposta">
 				<button class="add_field_button">+</button>
 			</div>
 		</div>
@@ -82,5 +81,6 @@
 			<a href="#" class="salvar_todos">Enviar</a>
 		</div>
 	</form>
+	<h1>NAO SE PREOCUPE, DECIDIRA QUAL A CORRETA E SEUS POSSIVEIS COMPLEMENTOS NA PROXIMA TELA</h1>
 </body>
 </html>

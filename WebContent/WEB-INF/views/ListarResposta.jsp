@@ -12,7 +12,6 @@
 		document.getElementById("a"+aq).click();
 	}
 	function salvar2(aq) {
-		alert("aaaaa")
 		document.getElementById("b"+aq).click();
 	}
 </script>
@@ -81,5 +80,6 @@
 		</tr>
 	</c:forEach>
 </table>
+<a href="index.jsp"><input type="submit" value="concluido >>>"></a>
 </body>
 </html>

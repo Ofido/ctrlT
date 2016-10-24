@@ -45,29 +45,6 @@
 		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
 		selectBoxAssunto.options[0].selected="selected";
 	}
-
-	function verifica() {
-
-		// Recupera o id da lista de selects de Assunto
-		var idAssunto = document.getElementById("idAssunto");
-		// Recupera o nome do valor selecionado na lista de Assunto
-		var valorSelecionadoAssunto = idAssunto.options[idAssunto.selectedIndex].value;
-		// Recupera o id da lista de selects de Disciplina
-		var idDisciplina = document.getElementById("idDisciplina");
-		// Recupera o nome do valor selecionado na lista de Disciplina
-		var valorSelecionadoDisciplina = idDisciplina.options[idDisciplina.selectedIndex].text;
-		// Compara e faz a validação se a Disciplina não foi selecionada
-		if (valorSelecionadoDisciplina == "Selecione uma Disciplina") {
-			alert("Disciplina inválida");
-			return false;
-		}
-		// Compara e faz a validação se o Assunto não foi selecionado
-		if (valorSelecionadoAssunto == "Selecione um Assunto") {
-			alert("Assunto inválido");
-			return false;
-		}
-		return false;
-	}
 </script>
 </head>
 <body>
@@ -78,34 +55,34 @@
 			value="${alterando.criadorQuestao.idProfessor }"> <input
 			type="hidden" name="idEspecialista"
 			value="${alterando.validadorQuestao.idEspecialista }"> <label
-			for="questao">
-		
-				Enunciado:</label> <input type="text" name="questao"
-				value="${alterando.questao }"></br> </br>
-			<!-- TODO MUDAR PARA TEXT AREA -->
-			<label>Disciplina</label><select name="idDisciplina"
-				id="selectBoxDisciplina"
-				onchange="consultaAssuntos(${assunto});teste();">
+			for="questao"> Enunciado:</label> <input type="text" name="questao"
+			value="${alterando.questao }"></br> </br>
+		<!-- TODO MUDAR PARA TEXT AREA -->
+		<label>Disciplina</label><select name="idDisciplina"
+			id="selectBoxDisciplina"
+			onchange="consultaAssuntos(${assunto});teste();">
 			<option value="0">Selecione uma disciplina</option>
+			<c:if test="${alterando.disciplinaQuestao != null}">
+				<option selected="selected"
+					value="${alterando.disciplinaQuestao.idDisciplina}">${alterando.disciplinaQuestao.nomeDisciplina}</option>
+			</c:if>
 			<c:forEach items="${disciplinas}" var="disc">
-				<c:if
-					test="${disc.idDisciplina == disciplinaSelecionada.disciplina.idDisciplina}">
-					<option selected="selected" value="${disc.idDisciplina}">${disc.nomeDisciplina}</option>
-				</c:if>
-				<c:if
-					test="${disc.idDisciplina != disciplinaSelecionada.disciplina.idDisciplina}">
-					<option value="${disc.idDisciplina}">${disc.nomeDisciplina}</option>
-				</c:if>
+				<option value="${disc.idDisciplina}">${disc.nomeDisciplina}</option>
 			</c:forEach>
 		</select></br> <label>Assunto</label> <select id="selectBoxAssunto" name="idAssunto">
 			<option value="0">Selecione um Assunto</option>
+			<c:if test="${alterando.assuntoQuestao != null}">
+				<option selected="selected"
+					value="${alterando.assuntoQuestao.idAssunto}">${alterando.assuntoQuestao.nomeAssunto}</option>
+			</c:if>
 			<c:forEach items="${assunto}" var="a">
 				<option value="${a.idAssunto}" style="display: none">${a.nomeAssunto}</option>
 			</c:forEach>
 		</select></br> <label>Tipo Questao:</label> <input type="radio" value="UNICA"
-			name="TipoQuestao">UNICA <input type="radio"
-			value="DISSERTATIVA" name="TipoQuestao">DISSERTATIVA <input
-			type="radio" value="VERDADEIROFALSO" name="TipoQuestao">VERDADEIROFALSO
+			name="TipoQuestao" checked="checked">UNICA <input
+			type="radio" value="DISSERTATIVA" name="TipoQuestao"
+			<c:if test="alterando.tipoQuestao">checked="checked"</c:if>>DISSERTATIVA
+		<input type="radio" value="VERDADEIROFALSO" name="TipoQuestao">VERDADEIROFALSO
 		<input type="radio" value="MULTIPLA" name="TipoQuestao">MULTIPLA
 		<br /> <br /> <label>Dificuldade da questão: </label><br /> <input
 			type="radio" name="nivelQuestao" value="0" />1 <input type="radio"
@@ -118,11 +95,10 @@
 			name="nivelQuestao" value="7" />8 <input type="radio"
 			name="nivelQuestao" value="8" />9 <input type="radio"
 			name="nivelQuestao" value="9" />10<br /> <br /> <br /> <label>Tempo
-			Questao: (min)</label> <input type="text" name="tempo"><br /> <br />
+			Questao: (min)</label> <input type="text" name="tempo" value="${alterando.tempoQuestao}"><br /> <br />
 		<br /> <label>Complemento:</label> <input type="file" name="arquivo"
-			accept="image/*"></br> </br>
-			<input type="hidden" id="tipo" name="tipoCadastro">
-		<input type="submit" value="Continuar">
+			accept="image/*"></br> </br> <input type="hidden" id="tipo"
+			name="tipoCadastro"> <input type="submit" value="Continuar">
 	</form>
 </body>
 </html>

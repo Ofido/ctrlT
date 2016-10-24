@@ -179,7 +179,7 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 				
 				assunto.setDisciplinaAssunto(disciplina);
 				questao.setDisciplinaQuestao(disciplina);
-				questao.setDisciplinaQuestao(disciplina);
+				questao.setAssuntoQuestao(assunto);
 				questao.setCriadorQuestao(professor);
 				questao.setValidadorQuestao(especialista);
 				questao.setTempoQuestao(tempoQuestao);

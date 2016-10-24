@@ -1,4 +1,4 @@
-package br.com.doors.ctrlt.controller;
+		package br.com.doors.ctrlt.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ import br.com.doors.ctrlt.dao.ProfessorDAO;
 import br.com.doors.ctrlt.dao.QuestaoDAO;
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
+import br.com.doors.ctrlt.model.Especialista;
+import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Questao;
 
 @Controller
@@ -84,7 +86,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro) {
+	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro, Professor prof, Especialista especialista) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
@@ -105,7 +107,9 @@ public class QuestaoController {
 		if (questao.getIdQuestao() == null) {			
 			questaoDAO.incluir(questao);
 		}else {
+			questao.setValidadorQuestao(especialistaDAO.procurar(especialista.getIdEspecialista()));//TODO arrumar
 			questaoDAO.alterar(questao);
+			return "index";
 		}
 		if (tipoCadastro.contains("CadastroComum")) {//TODO FAZER ISSO FUNCIONAR
 			return "index";

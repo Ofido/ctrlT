@@ -45,9 +45,47 @@
 		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
 		selectBoxAssunto.options[0].selected="selected";
 	}
+	
+	function checkDificult(aqui) {
+		switch (aqui) {
+		case 0:
+			document.getElementById("nivelQuestao1").checked="checked";
+			break;
+		case 1:
+			document.getElementById("nivelQuestao2").checked="checked";
+			break;
+		case 2:
+			document.getElementById("nivelQuestao3").checked="checked";
+			break;
+		case 3:
+			document.getElementById("nivelQuestao4").checked="checked";
+			break;
+		case 4:
+			document.getElementById("nivelQuestao5").checked="checked";
+			break;
+		case 5:
+			document.getElementById("nivelQuestao6").checked="checked";
+			break;
+		case 6:
+			document.getElementById("nivelQuestao7").checked="checked";
+			break;
+		case 7:
+			document.getElementById("nivelQuestao8").checked="checked";
+			break;
+		case 8:
+			document.getElementById("nivelQuestao9").checked="checked";
+			break;
+		case 9:
+			document.getElementById("nivelQuestao10").checked="checked";
+			break;	
+		default:
+			document.getElementById("nivelQuestao1").checked="checked";
+			break;
+		}
+	}
 </script>
 </head>
-<body>
+<body onload="checkDificult(${alterando.nivelQuestao });">
 	<form action="CadastroQuestao" enctype="multipart/form-data"
 		method="post">
 		<input type="hidden" name="idQuestao" value="${alterando.idQuestao }">
@@ -81,24 +119,27 @@
 		</select></br> <label>Tipo Questao:</label> <input type="radio" value="UNICA"
 			name="TipoQuestao" checked="checked">UNICA <input
 			type="radio" value="DISSERTATIVA" name="TipoQuestao"
-			<c:if test="alterando.tipoQuestao">checked="checked"</c:if>>DISSERTATIVA
-		<input type="radio" value="VERDADEIROFALSO" name="TipoQuestao">VERDADEIROFALSO
-		<input type="radio" value="MULTIPLA" name="TipoQuestao">MULTIPLA
+			<c:if test="${alterando.tipoQuestao == DISSERTATIVA}">checked="checked"</c:if>>DISSERTATIVA
+		<input type="radio" value="VERDADEIROFALSO" name="TipoQuestao"
+			<c:if test="${alterando.tipoQuestao == VERDADEIROFALSO}">checked="checked"</c:if>>VERDADEIROFALSO
+		<input type="radio" value="MULTIPLA" name="TipoQuestao"
+			<c:if test="${alterando.tipoQuestao == MULTIPLA}">checked="checked"</c:if>>MULTIPLA
 		<br /> <br /> <label>Dificuldade da questão: </label><br /> <input
-			type="radio" name="nivelQuestao" value="0" />1 <input type="radio"
-			name="nivelQuestao" value="1" />2 <input type="radio"
-			name="nivelQuestao" value="2" />3 <input type="radio"
-			name="nivelQuestao" value="3" />4 <input type="radio"
-			name="nivelQuestao" value="4" />5 <input type="radio"
-			name="nivelQuestao" value="5" />6 <input type="radio"
-			name="nivelQuestao" value="6" />7 <input type="radio"
-			name="nivelQuestao" value="7" />8 <input type="radio"
-			name="nivelQuestao" value="8" />9 <input type="radio"
-			name="nivelQuestao" value="9" />10<br /> <br /> <br /> <label>Tempo
-			Questao: (min)</label> <input type="text" name="tempo" value="${alterando.tempoQuestao}"><br /> <br />
-		<br /> <label>Complemento:</label> <input type="file" name="arquivo"
-			accept="image/*"></br> </br> <input type="hidden" id="tipo"
-			name="tipoCadastro"> <input type="submit" value="Continuar">
+			type="radio" name="nivelQuestao" value="0" id="nivelQuestao1"/>1 <input type="radio"
+			name="nivelQuestao" value="1" id="nivelQuestao2"/>2 <input type="radio"
+			name="nivelQuestao" value="2" id="nivelQuestao3"/>3 <input type="radio"
+			name="nivelQuestao" value="3" id="nivelQuestao4"/>4 <input type="radio"
+			name="nivelQuestao" value="4" id="nivelQuestao5"/>5 <input type="radio"
+			name="nivelQuestao" value="5" id="nivelQuestao6"/>6 <input type="radio"
+			name="nivelQuestao" value="6" id="nivelQuestao7"/>7 <input type="radio"
+			name="nivelQuestao" value="7" id="nivelQuestao8"/>8 <input type="radio"
+			name="nivelQuestao" value="8" id="nivelQuestao9"/>9 <input type="radio"
+			name="nivelQuestao" value="9" id="nivelQuestao10"/>10<br /> <br /> <br /> <label>Tempo
+			Questao: (min)</label> <input type="text" name="tempo"
+			value="${alterando.tempoQuestao}"><br /> <br /> <br /> <label>Complemento:</label>
+		<input type="file" name="arquivo" accept="image/*"></br> </br> <input
+			type="hidden" id="tipo" name="tipoCadastro"> <input
+			type="submit" value="Continuar">
 	</form>
 </body>
 </html>

@@ -21,9 +21,11 @@
 		<th>
 			ID
 		</th>
+		<c:if test="${tipoQuestao != DISSERTATIVA }">
 		<th>
 			CORRETA
 		</th>
+		</c:if>
 		<th>
 			RESPOSTA
 		</th>
@@ -45,6 +47,7 @@
 			<td>
 				${p.idResposta }
 			</td>
+			<c:if test="${tipoQuestao != DISSERTATIVA }">
 			<td>
 				<form action="CadastroResposta" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="idQuestao" value="${questao }">
@@ -54,6 +57,7 @@
 					<input type="submit" id="a${p.idResposta }" style="display: none;">
 				</form>
 			</td>
+			</c:if>
 			<td>
 				<div style="width: 100px;">
 					${p.resposta}

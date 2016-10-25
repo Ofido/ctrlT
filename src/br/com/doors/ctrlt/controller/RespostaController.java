@@ -8,33 +8,39 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.com.doors.ctrlt.dao.QuestaoDAO;
 import br.com.doors.ctrlt.dao.RespostaDAO;
 import br.com.doors.ctrlt.model.Resposta;
+import br.com.doors.ctrlt.model.TipoQuestao;
 
 @Controller
 public class RespostaController {
 	private final RespostaDAO respostaDAO;
+	private final QuestaoDAO questaoDAO;
 
 	@Autowired
-	public RespostaController(RespostaDAO daoP) {
+	public RespostaController(RespostaDAO daoP, QuestaoDAO dao) {
 		this.respostaDAO = daoP;
+		this.questaoDAO = dao;
 	}
 
 	@RequestMapping("CadastrandoResposta")
-	public String caminhoCadastro(Model session, Long id, Long idQuestao) {
+	public String caminhoCadastro(Model session, Long id, Long idQuestao, TipoQuestao tipoQuestao) {
 		session.addAttribute("questao", idQuestao);
-		if (id != null) {
+		session.addAttribute("tipo", (tipoQuestao.equals(TipoQuestao.DISSERTATIVA)?true:false));
+		if (respostaDAO.procurarQuestao(idQuestao) != null) {
 			session.addAttribute("lista",
 					respostaDAO.procurarQuestao(idQuestao));
 		}
-		return "CadastroResposta";
+		return "CadastroResposta";//TODO ARRUMAR PARA TODOS OS TIPOS DE QUESTOES
 	}
 
 	@RequestMapping("ListandoResposta")
 	private String listar(Model session, Long idQuestao) {
+		session.addAttribute("tipoQuesao", questaoDAO.procurar(idQuestao).getTipoQuestao());
 		session.addAttribute("lista", respostaDAO.procurarQuestao(idQuestao));
 		session.addAttribute("questao", idQuestao);
-		return "ListarResposta";
+		return "ListarResposta";//TODO ARRUMAR PARA TODOS OS TIPOS DE QUESTOES
 	}
 
 	@RequestMapping("ExcluirResposta")

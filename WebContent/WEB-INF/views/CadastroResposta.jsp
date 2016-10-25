@@ -69,6 +69,7 @@
 <body>
 	<form id="target" action="CadastroResposta" enctype="multipart/form-data" method="post">
 		<input type="hidden" name="idQuestao" value="${questao }">
+		<c:if test="${tipoQuestao }">
 		<div class="input_fields_wrap">
 			<div>
 
@@ -80,6 +81,12 @@
 		<div class="wrapperSubmit">
 			<a href="#" class="salvar_todos">Enviar</a>
 		</div>
+		</c:if>
+		<c:if test="${!tipoQuestao }">
+		<input type="hidden" name="correta" value="true">
+		<input type="text" name="resposta">
+		<input type="submit" value="ok">
+		</c:if>
 	</form>
 	<h1>NAO SE PREOCUPE, DECIDIRA QUAL A CORRETA E SEUS POSSIVEIS COMPLEMENTOS NA PROXIMA TELA</h1>
 </body>

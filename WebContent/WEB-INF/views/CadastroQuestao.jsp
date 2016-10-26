@@ -45,6 +45,9 @@
 		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
 		selectBoxAssunto.options[0].selected="selected";
 	}
+	function espec() {
+		
+	}
 	
 	function checkDificult(aqui) {
 		switch (aqui) {
@@ -85,7 +88,7 @@
 	}
 </script>
 </head>
-<body onload="checkDificult(${alterando.nivelQuestao });">
+<body onload="checkDificult(${alterando.nivelQuestao }); <c:if test="${usuarioLogado.idEspecialista != null}">espec(); </c:if>">
 	<form action="CadastroQuestao" enctype="multipart/form-data"
 		method="post">
 		<input type="hidden" name="idQuestao" value="${alterando.idQuestao }">

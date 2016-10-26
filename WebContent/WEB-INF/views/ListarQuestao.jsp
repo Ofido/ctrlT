@@ -47,6 +47,7 @@
 		<th>
 			ÚLTIMO USO DA QUESTÃO
 		</th>
+		<c:if test="${usuarioLogado.idEspecialista == null}">
 		<th>
 			EXCLUI
 		</th>
@@ -56,6 +57,7 @@
 		<th>
 			ADD RESPOSTA
 		</th>
+		</c:if>
 	</tr>
 	<c:forEach items="${lista }" var="p">
 		<tr>
@@ -64,6 +66,9 @@
 			</td>
 			<td>
 				${p.validadaQuestao }
+			<c:if test="${usuarioLogado.idEspecialista != null}">
+				<br><a href="CadastrandoQuestao?id=${p.idQuestao }">Validar</a>
+			</c:if>
 			</td>
 			<td>
 				${p.questao }
@@ -97,6 +102,7 @@
 				<fmt:formatDate pattern="yyyy-MM-dd(HH:mm:ss)" value="${p.ultimoUsoQuestao.time}" var="ultimoUsoQuestao" />
 				${ultimoUsoQuestao }
 			</td>
+			<c:if test="${usuarioLogado.idEspecialista == null}">
 			<td>
 				<a href="ExcluirQuestao?id=${p.idQuestao }">Excluir</a>
 			</td>
@@ -104,8 +110,9 @@
 				<a href="CadastrandoQuestao?id=${p.idQuestao }">Alterar</a>
 			</td>
 			<td>
-				<a href="ListandoResposta?idQuestao=${p.idQuestao }">Alterar</a>
+				<a href="ListandoResposta?idQuestao=${p.idQuestao }">Respostas</a>
 			</td>
+			</c:if>
 		</tr>
 	</c:forEach>
 	</table>

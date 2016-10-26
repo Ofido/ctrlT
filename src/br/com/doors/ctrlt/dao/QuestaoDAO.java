@@ -24,7 +24,7 @@ import br.com.doors.ctrlt.model.TipoQuestao;
 @Repository
 public class QuestaoDAO implements InterfaceQuestaoDAO {
 	private static final String INCLUIR = "insert into ctrlt.questao(idDisciplina, idProfessor, idEspecialista, idAssunto, tempoQuestao, "
-			+ "nivelQuestao, questao, ultimoUsoQuestao, validadaQuestao, comentario, tipoQuestao, complementoQuestao, quantidadeUso, ratingAluno, ratingProfessor) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			+ "nivelQuestao, questao, ultimoUsoQuestao, validadaQuestao, comentario, tipoQuestao, complementoQuestao) value (?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.questao where idQuestao=?";
 	private static final String ALTERAR = "update ctrlt.questao set idDisciplina=?, idProfessor=?, idEspecialista=?, idAssunto=?,tempoQuestao=?, "
 			+ "nivelQuestao=?, questao=?, ultimoUsoQuestao=?, validadaQuestao=?, comentario=?, tipoQuestao=?, complementoQuestao=?, quantidadeUso=?, ratingAluno=?, ratingProfessor=? where idQuestao=?";
@@ -57,13 +57,10 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(6, t.getNivelQuestao());
 			stmt.setString(7, t.getQuestao());
 			stmt.setLong(8, t.getUltimoUsoQuestao().getTimeInMillis());
-			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));
 			stmt.setString(10, t.getComentario());
 			stmt.setInt(11, t.getTipoQuestao().ordinal());
 			stmt.setBlob(12, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(13, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(15, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
 			
 			stmt.execute();
 			ResultSet rs = stmt.getGeneratedKeys();
@@ -92,13 +89,13 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 			stmt.setLong(6, t.getNivelQuestao());
 			stmt.setString(7, t.getQuestao());
 			stmt.setLong(8, t.getUltimoUsoQuestao().getTimeInMillis());
-			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));//TODO TODA QUESTAO CADASTRADA NAO STA VALIDADA
+			stmt.setBoolean(9, (t.getValidadaQuestao()==null?false:t.getValidadaQuestao()));
 			stmt.setString(10, t.getComentario());
 			stmt.setInt(11, t.getTipoQuestao().ordinal());
 			stmt.setBlob(12, (t.getComplementoQuestao()==null?null:new ByteArrayInputStream(t.getComplementoQuestao())));
-			stmt.setLong(13, 0L);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(14, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
-			stmt.setInt(15, 0);//TODO TODA QUESTAO CADASTRADA NAO FOI USADA
+			stmt.setLong(13, 0L);
+			stmt.setInt(14, 0);
+			stmt.setInt(15, 0);
 			stmt.setLong(16, t.getIdQuestao());
 			
 			stmt.execute();

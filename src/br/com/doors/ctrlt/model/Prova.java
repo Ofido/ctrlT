@@ -7,7 +7,7 @@ public class Prova {
 	private Long id;
 	private List<Questao> questoes;
 	private Professor professor;
-	private Turma turma;// TODO alunos que farão a prova
+	private Turma turma;
 	private TipoProva tipoProva;
 	private Calendar tempo;
 	private Calendar inicio;

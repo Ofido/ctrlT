@@ -42,7 +42,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastrandoQuestao")
-	public String caminhoCadastro(Model modelo, Long id) {
+	public String caminhoCadastro(Model modelo, Long id,HttpSession session) {
 		List<Disciplina>disciplinas = null;
 		List<Assunto>assuntos = null;
 		if (id != null) {			
@@ -50,7 +50,9 @@ public class QuestaoController {
 			assuntos = new ArrayList<Assunto>();
 			Questao questao = questaoDAO.procurar(id);
 			modelo.addAttribute("alterando", questao);
-			modelo.addAttribute("especialista", especialistaDAO.procurar(2L));//TODO TEIRAR APOS TESTE
+			if (session.getAttribute("usuarioLogado").getClass() == Especialista.class) {
+			modelo.addAttribute("especialista", session.getAttribute("usuarioLogado"));
+			}
 			disciplinas.add(questao.getDisciplinaQuestao());
 			assuntos.add(questao.getAssuntoQuestao());
 			for (Disciplina disciplina : disciplinasDAO.listarTodos()) {
@@ -106,10 +108,13 @@ public class QuestaoController {
 		questao.setValidadorQuestao(especialistaDAO.procurar(1L));
 		questao.setDisciplinaQuestao(disciplina);
 		questao.setAssuntoQuestao(assunto);
+		if (especialista.getIdEspecialista() == null) {
+			especialista.setIdEspecialista(1L);
+		}
+		questao.setValidadorQuestao(especialistaDAO.procurar(especialista.getIdEspecialista()));
 		if (questao.getIdQuestao() == null) {			
 			questaoDAO.incluir(questao);
 		}else {
-			questao.setValidadorQuestao(especialistaDAO.procurar(especialista.getIdEspecialista()));//TODO arrumar
 			questaoDAO.alterar(questao);
 			return "index";
 		}

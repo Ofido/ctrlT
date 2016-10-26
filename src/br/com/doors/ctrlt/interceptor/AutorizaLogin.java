@@ -12,7 +12,7 @@ public class AutorizaLogin extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object controller) throws Exception {
 		
 		String uri = request.getRequestURI();
-		if(uri.endsWith("Login") ||uri.endsWith("efetuaLogin") || uri.contains("resources") || uri.contains("autoCadastro")){
+		if(uri.endsWith("Login") ||uri.endsWith("efetuaLogin") || uri.contains("resources") || uri.contains("CadastrandoAluno") || uri.contains("CadastrandoProfessor")){
 			return true;
 		}
 		if(request.getSession().getAttribute("usuarioLogado") != null){

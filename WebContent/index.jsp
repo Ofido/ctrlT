@@ -35,7 +35,7 @@
 		<a href="ListandoProfessor"> listar </a>
 	</p>
 	</div>
-	<div style="border: aqua solid;">
+	<!-- <div style="border: aqua solid;">
 	<h1>Disciplina</h1>
 	<p>
 		<a href="CadastrandoDisciplina"> cadastro</a>
@@ -43,8 +43,8 @@
 	<p>
 		<a href="ListandoDisciplina"> listar </a>
 	</p>
-	</div>
-	<div style="border: aqua solid;">
+	</div> -->
+	<!--<div style="border: aqua solid;">
 	<h1>Assunto</h1>
 	<p>
 		<a href="CadastrandoAssunto"> cadastro</a>
@@ -52,8 +52,8 @@
 	<p>
 		<a href="ListandoAssunto"> listar </a>
 	</p>
-	</div>
-	<div style="border: aqua solid;">
+	</div> -->
+	<!--<div style="border: aqua solid;">
 	<h1>Questao</h1>
 	<p>
 		<a href="CadastrandoQuestao"> cadastro</a>
@@ -61,11 +61,11 @@
 	<p>
 		<a href="ListandoQuestao"> listar </a>
 	</p>
-	</div>
+	</div> -->
 	<div style="border: aqua solid;">
 	<h1>Aluno</h1>
 	<p>
-		<a href="CadastrandoAluno"> auto cadastro aluno </a>
+		<a href="CadastrandoAluno"> auto cadastro aluno      <strong>ERRADO</strong>  </a>
 	</p>
 	<p>
 		<a href="ListandoAluno"> listar </a>

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -86,7 +88,7 @@ public class QuestaoController {
 	}
 	
 	@RequestMapping("CadastroQuestao")
-	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro, Professor prof, Especialista especialista) {
+	public String cadastro(Model session, Assunto assunto, Questao questao, Disciplina disciplina, MultipartFile arquivo, Integer tempo, String tipoCadastro, Professor prof, Especialista especialista, HttpSession session2) {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
@@ -100,8 +102,8 @@ public class QuestaoController {
 				throw new RuntimeException("ERRO NA FOTO"+ this.getClass() + e.toString());
 			}
 		}
-		questao.setCriadorQuestao(professorDAO.procurar(12L));//TODO arrumar
-		questao.setValidadorQuestao(especialistaDAO.procurar(1L));//TODO arrumar
+		questao.setCriadorQuestao(professorDAO.procurar(((Professor) session2.getAttribute("usuarioLogado")).getIdProfessor()));
+		questao.setValidadorQuestao(especialistaDAO.procurar(1L));
 		questao.setDisciplinaQuestao(disciplina);
 		questao.setAssuntoQuestao(assunto);
 		if (questao.getIdQuestao() == null) {			

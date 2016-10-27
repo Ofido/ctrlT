@@ -32,15 +32,15 @@ public class RespostaController {
 			session.addAttribute("lista",
 					respostaDAO.procurarQuestao(idQuestao));
 		}
-		return "CadastroResposta";//TODO ARRUMAR PARA TODOS OS TIPOS DE QUESTOES
+		return "CadastroResposta";
 	}
 
 	@RequestMapping("ListandoResposta")
 	private String listar(Model session, Long idQuestao) {
-		session.addAttribute("tipoQuesao", questaoDAO.procurar(idQuestao).getTipoQuestao());
+		session.addAttribute("tipoQuestao", questaoDAO.procurar(idQuestao).getTipoQuestao());
 		session.addAttribute("lista", respostaDAO.procurarQuestao(idQuestao));
 		session.addAttribute("questao", idQuestao);
-		return "ListarResposta";//TODO ARRUMAR PARA TODOS OS TIPOS DE QUESTOES
+		return "ListarResposta";
 	}
 
 	@RequestMapping("ExcluirResposta")
@@ -67,6 +67,7 @@ public class RespostaController {
 			String[] respostas = resposta.getResposta().trim().split(",");
 			for (int i = 0; i < respostas.length; i++) {
 				Resposta a = new Resposta();
+				a.setCorretaResposta((questaoDAO.procurar(idQuestao).getTipoQuestao().equals(TipoQuestao.UNICA) && i==0));
 				a.setResposta(respostas[i]);
 				respostaDAO.incluir(a, idQuestao);
 			}
@@ -75,6 +76,6 @@ public class RespostaController {
 		} else {
 			respostaDAO.alterar(resposta, idQuestao);
 		}	
-		return "redirect:ListandoResposta?idQuestao=" + idQuestao.toString();// TODO ARRUMAR PARA TODOS OS TIPOS DE QUESTOES
+		return "redirect:ListandoResposta?idQuestao=" + idQuestao.toString();
 	}
 }

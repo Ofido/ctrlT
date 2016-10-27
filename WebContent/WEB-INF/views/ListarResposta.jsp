@@ -12,7 +12,7 @@
 		document.getElementById("a"+aq).click();
 	}
 	function salvar2(aq) {
-		document.getElementById("b"+aq).click();
+		document.getElementById("b"+aq).click();		
 	}
 </script>
 <body>
@@ -21,7 +21,7 @@
 		<th>
 			ID
 		</th>
-		<c:if test="${tipoQuestao != DISSERTATIVA }">
+		<c:if test="${tipoQuestao != 'DISSERTATIVA')">
 		<th>
 			CORRETA
 		</th>
@@ -47,8 +47,9 @@
 			<td>
 				${p.idResposta }
 			</td>
-			<c:if test="${tipoQuestao != DISSERTATIVA }">
+			<c:if test="${tipoQuestao != 'DISSERTATIVA')">
 			<td>
+			<c:if test="${tipoQuestao == 'MULTIPLA'}">
 				<form action="CadastroResposta" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="idQuestao" value="${questao }">
 					<input type="hidden" name="idResposta" value="${p.idResposta }">
@@ -56,6 +57,19 @@
 					<input type="hidden" name="alterandoCorreta" value="true">
 					<input type="submit" id="a${p.idResposta }" style="display: none;">
 				</form>
+			</c:if>
+			<c:if test="${tipoQuestao == 'VERDADEIROFALSO')">
+				<form action="CadastroResposta" enctype="multipart/form-data" method="post">
+					<input type="hidden" name="idQuestao" value="${questao }">
+					<input type="hidden" name="idResposta" value="${p.idResposta }">
+					<input type="checkbox" name="corretaResposta" onclick="salvar(${p.idResposta })" <c:if test="${p.corretaResposta }">checked="checked"</c:if>>
+					<input type="hidden" name="alterandoCorreta" value="true">
+					<input type="submit" id="a${p.idResposta }" style="display: none;">
+				</form>
+			</c:if>
+			<c:if test="${tipoQuestao == 'UNICA')">
+				${p.corretaResposta}
+			</c:if>
 			</td>
 			</c:if>
 			<td>

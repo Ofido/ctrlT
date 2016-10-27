@@ -131,7 +131,7 @@ public class QuestaoController {
 			questaoDAO.alterar(questao);
 			return "index";
 		}
-		if (tipoCadastro.contains("CadastroComum")) {//TODO FAZER ISSO FUNCIONAR
+		if (tipoCadastro.equals("CadastroComum")) {//TODO FAZER ISSO FUNCIONAR
 			return "index";
 		}else{
 			return "redirect:CadastrandoResposta?id=&idQuestao=" + questao.getIdQuestao().toString()+"&tipoQuestao="+questao.getTipoQuestao();

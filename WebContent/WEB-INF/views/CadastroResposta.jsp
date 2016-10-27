@@ -69,7 +69,7 @@
 <body>
 	<form id="target" action="CadastroResposta" enctype="multipart/form-data" method="post">
 		<input type="hidden" name="idQuestao" value="${questao }">
-		<c:if test="${tipoQuestao }">
+		<c:if test="${!tipoQuestao }">
 		<div class="input_fields_wrap">
 			<div>
 
@@ -82,7 +82,7 @@
 			<a href="#" class="salvar_todos">Enviar</a>
 		</div>
 		</c:if>
-		<c:if test="${!tipoQuestao }">
+		<c:if test="${tipoQuestao }">
 		<input type="hidden" name="correta" value="true">
 		<input type="text" name="resposta">
 		<input type="submit" value="ok">

@@ -18,27 +18,31 @@ import br.com.doors.ctrlt.dao.DisciplinaDAO;
 import br.com.doors.ctrlt.dao.EspecialistaDAO;
 import br.com.doors.ctrlt.dao.ProfessorDAO;
 import br.com.doors.ctrlt.dao.QuestaoDAO;
+import br.com.doors.ctrlt.dao.RespostaDAO;
 import br.com.doors.ctrlt.model.Assunto;
 import br.com.doors.ctrlt.model.Disciplina;
 import br.com.doors.ctrlt.model.Especialista;
 import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Questao;
+import br.com.doors.ctrlt.model.Resposta;
 
 @Controller
 public class QuestaoController {
 	private final DisciplinaDAO disciplinasDAO;
 	private final QuestaoDAO questaoDAO;
+	private final RespostaDAO respostaDAO;
 	private final ProfessorDAO professorDAO;
 	private final EspecialistaDAO especialistaDAO;
 	private final AssuntoDAO assuntoDAO;
 	
 	@Autowired
-	public QuestaoController(ProfessorDAO professorDAO, DisciplinaDAO disciplinaDAO, QuestaoDAO questaoDAO, EspecialistaDAO especialistaDAO, AssuntoDAO assuntoDAO){
+	public QuestaoController(ProfessorDAO professorDAO, RespostaDAO respostaDAO, DisciplinaDAO disciplinaDAO, QuestaoDAO questaoDAO, EspecialistaDAO especialistaDAO, AssuntoDAO assuntoDAO){
 		this.professorDAO = professorDAO;
 		this.disciplinasDAO = disciplinaDAO;
 		this.questaoDAO = questaoDAO;
 		this.especialistaDAO = especialistaDAO;
 		this.assuntoDAO = assuntoDAO;
+		this.respostaDAO = respostaDAO;
 	}
 	
 	@RequestMapping("CadastrandoQuestao")
@@ -74,6 +78,9 @@ public class QuestaoController {
 		}
 		modelo.addAttribute("disciplinas", disciplinas);
 		modelo.addAttribute("assunto", assuntos);
+		if (session.getAttribute("usuarioLogado") != null && session.getAttribute("usuarioLogado").getClass() == Especialista.class) {
+			return "ValidaQuestao";
+		}
 		return "CadastroQuestao";
 	}
 	
@@ -85,6 +92,9 @@ public class QuestaoController {
 
 	@RequestMapping("ExcluirQuestao")
 	private String excluir(Long id) {
+		for (Resposta r : respostaDAO.procurarQuestao(id)) {
+			respostaDAO.excluir(r);
+		}
 		questaoDAO.excluir(id);
 		return "redirect:ListandoQuestao";
 	}
@@ -112,6 +122,9 @@ public class QuestaoController {
 			especialista.setIdEspecialista(1L);
 		}
 		questao.setValidadorQuestao(especialistaDAO.procurar(especialista.getIdEspecialista()));
+		if (session2.getAttribute("usuarioLogado").getClass() == Especialista.class) {
+			questao.setComentario(questao.getComentario()+"<br>"+especialista.getEmailEspecialista()+"<br>"+especialista.getTelefoneEspecialista());
+		}
 		if (questao.getIdQuestao() == null) {			
 			questaoDAO.incluir(questao);
 		}else {

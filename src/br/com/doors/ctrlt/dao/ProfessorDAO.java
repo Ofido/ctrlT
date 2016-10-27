@@ -168,7 +168,6 @@ public class ProfessorDAO implements InterfaceProfessorDAO {
 
 	@Override
 	public Professor logar(String email, String senha) {
-		System.out.println(email + "     " + senha);
 		if (email == null) {
 			return null;
 		}

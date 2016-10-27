@@ -45,9 +45,6 @@
 		var selectBoxAssunto = document.getElementById("selectBoxAssunto");
 		selectBoxAssunto.options[0].selected="selected";
 	}
-	function espec() {
-		
-	}
 	
 	function checkDificult(aqui) {
 		switch (aqui) {
@@ -92,15 +89,15 @@
 	<form action="CadastroQuestao" enctype="multipart/form-data"
 		method="post">
 		<input type="hidden" name="idQuestao" value="${alterando.idQuestao }">
-		<input type="hidden" name="idProfessor"
-			value="${alterando.criadorQuestao.idProfessor }"> <input
+		<input type="text" name="idProfessor" value="${alterando.criadorQuestao.idProfessor }" disabled="disabled">
+		<input
 			type="hidden" name="idEspecialista"
 			value="${alterando.validadorQuestao.idEspecialista }"> <label
 			for="questao"> Enunciado:</label> <input type="text" name="questao"
-			value="${alterando.questao }"></br> </br>
+			value="${alterando.questao }" disabled="disabled"></br> </br>
 		<!-- TODO MUDAR PARA TEXT AREA -->
 		<label>Disciplina</label><select name="idDisciplina"
-			id="selectBoxDisciplina"
+			id="selectBoxDisciplina" disabled="disabled"
 			onchange="consultaAssuntos(${assunto});teste();">
 			<option value="0">Selecione uma disciplina</option>
 			<c:if test="${alterando.disciplinaQuestao != null}">
@@ -110,7 +107,7 @@
 			<c:forEach items="${disciplinas}" var="disc">
 				<option value="${disc.idDisciplina}">${disc.nomeDisciplina}</option>
 			</c:forEach>
-		</select></br> <label>Assunto</label> <select id="selectBoxAssunto" name="idAssunto">
+		</select></br> <label>Assunto</label> <select id="selectBoxAssunto" name="idAssunto" disabled="disabled">
 			<option value="0">Selecione um Assunto</option>
 			<c:if test="${alterando.assuntoQuestao != null}">
 				<option selected="selected"
@@ -120,31 +117,31 @@
 				<option value="${a.idAssunto}" style="display: none">${a.nomeAssunto}</option>
 			</c:forEach>
 		</select></br> <label>Tipo Questao:</label> <input type="radio" value="UNICA"
-			name="TipoQuestao" checked="checked">UNICA <input
+			name="TipoQuestao" checked="checked" disabled="disabled">UNICA <input
 			type="radio" value="DISSERTATIVA" name="TipoQuestao"
-			<c:if test="${alterando.tipoQuestao == DISSERTATIVA}">checked="checked"</c:if>>DISSERTATIVA
+			<c:if test="${alterando.tipoQuestao == DISSERTATIVA}">checked="checked"</c:if> disabled="disabled">DISSERTATIVA
 		<input type="radio" value="VERDADEIROFALSO" name="TipoQuestao"
-			<c:if test="${alterando.tipoQuestao == VERDADEIROFALSO}">checked="checked"</c:if>>VERDADEIROFALSO
+			<c:if test="${alterando.tipoQuestao == VERDADEIROFALSO}">checked="checked"</c:if> disabled="disabled">VERDADEIROFALSO
 		<input type="radio" value="MULTIPLA" name="TipoQuestao"
-			<c:if test="${alterando.tipoQuestao == MULTIPLA}">checked="checked"</c:if>>MULTIPLA
+			<c:if test="${alterando.tipoQuestao == MULTIPLA}">checked="checked"</c:if> disabled="disabled">MULTIPLA
 		<br /> <br /> <label>Dificuldade da questão: </label><br /> <input
-			type="radio" name="nivelQuestao" value="0" id="nivelQuestao1"/>1 <input type="radio"
-			name="nivelQuestao" value="1" id="nivelQuestao2"/>2 <input type="radio"
-			name="nivelQuestao" value="2" id="nivelQuestao3"/>3 <input type="radio"
-			name="nivelQuestao" value="3" id="nivelQuestao4"/>4 <input type="radio"
-			name="nivelQuestao" value="4" id="nivelQuestao5"/>5 <input type="radio"
-			name="nivelQuestao" value="5" id="nivelQuestao6"/>6 <input type="radio"
-			name="nivelQuestao" value="6" id="nivelQuestao7"/>7 <input type="radio"
-			name="nivelQuestao" value="7" id="nivelQuestao8"/>8 <input type="radio"
-			name="nivelQuestao" value="8" id="nivelQuestao9"/>9 <input type="radio"
-			name="nivelQuestao" value="9" id="nivelQuestao10"/>10<br /> <br /> <br /> <label>Tempo
+			type="radio" name="nivelQuestao" value="0" id="nivelQuestao1"disabled="disabled"/>1 <input type="radio"
+			name="nivelQuestao" value="1" id="nivelQuestao2"disabled="disabled"/>2 <input type="radio"
+			name="nivelQuestao" value="2" id="nivelQuestao3"disabled="disabled"/>3 <input type="radio"
+			name="nivelQuestao" value="3" id="nivelQuestao4"disabled="disabled"/>4 <input type="radio"
+			name="nivelQuestao" value="4" id="nivelQuestao5"disabled="disabled"/>5 <input type="radio"
+			name="nivelQuestao" value="5" id="nivelQuestao6"disabled="disabled"/>6 <input type="radio"
+			name="nivelQuestao" value="6" id="nivelQuestao7"disabled="disabled"/>7 <input type="radio"
+			name="nivelQuestao" value="7" id="nivelQuestao8"disabled="disabled"/>8 <input type="radio"
+			name="nivelQuestao" value="8" id="nivelQuestao9"disabled="disabled"/>9 <input type="radio"
+			name="nivelQuestao" value="9" id="nivelQuestao10"disabled="disabled"/>10<br /> <br /> <br /> <label>Tempo
 			Questao: (min)</label> <input type="text" name="tempo"
-			value="${alterando.tempoQuestao}"><br /> <br /> <br /> <label>Complemento:</label>
-		<input type="file" name="arquivo" accept="image/*"></br> </br> <input
-			type="hidden" id="tipo" name="tipoCadastro"> 
-			<textarea cols="100" rows="100" name="comentario" disabled="disabled">${alterando.comentario}</textarea>
+			value="${alterando.tempoQuestao}"disabled="disabled"><br /> <br /> <br /> <label>Complemento:</label>
+			<img src="data:image/*;base64, ${alterando.foto64 }"> </br> </br>
+			<textarea cols="100" rows="100" name="comentario">${alterando.comentario}</textarea>
 			<input
-			type="submit" value="Continuar">
+			type="hidden" id="tipo" name="tipoCadastro"> <input
+			type="submit" value="Validar">
 	</form>
 </body>
 </html>

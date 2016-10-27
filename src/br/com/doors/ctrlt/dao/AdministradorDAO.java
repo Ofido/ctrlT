@@ -127,7 +127,6 @@ public class AdministradorDAO implements InterfaceAdministradorDAO {
 
 	@Override
 	public Administrador logar(String email, String senha) {
-		System.out.println(email + "     " + senha);
 		if (email == null) {
 			return null;
 		}

@@ -150,7 +150,6 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 
 	@Override
 	public Especialista logar(String email, String senha) {
-		System.out.println(email + "     " + senha);
 		if (email == null) {
 			return null;
 		}
@@ -187,7 +186,7 @@ public class EspecialistaDAO implements InterfaceEspecialistaDAO {
 			stmt.close();
 			return especialista;
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("AQUI"+e);
 		}
 	}
 

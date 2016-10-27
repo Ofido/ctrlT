@@ -36,9 +36,6 @@
 			VALIDADOR DA QUESTÃO
 		</th>
 		<th>
-			QUANTIDADE DE RESPOSTAS
-		</th>
-		<th>
 			NÍVEL DA QUESTÃO
 		</th>
 		<th>
@@ -47,7 +44,7 @@
 		<th>
 			ÚLTIMO USO DA QUESTÃO
 		</th>
-		<c:if test="${usuarioLogado.idEspecialista == null}">
+		<c:if test="${!esp}">
 		<th>
 			EXCLUI
 		</th>
@@ -66,7 +63,7 @@
 			</td>
 			<td>
 				${p.validadaQuestao }
-			<c:if test="${usuarioLogado.idEspecialista != null}">
+			<c:if test="${esp}">
 				<br><a href="CadastrandoQuestao?id=${p.idQuestao }">Validar</a>
 			</c:if>
 			</td>
@@ -89,9 +86,6 @@
 				${p.validadorQuestao.nomeEspecialista }
 			</td>
 			<td>
-				${p.respostasQuestao.length }
-			</td>
-			<td>
 				${p.nivelQuestao+1}
 			</td>
 			<td>
@@ -102,7 +96,7 @@
 				<fmt:formatDate pattern="yyyy-MM-dd(HH:mm:ss)" value="${p.ultimoUsoQuestao.time}" var="ultimoUsoQuestao" />
 				${ultimoUsoQuestao }
 			</td>
-			<c:if test="${usuarioLogado.idEspecialista == null}">
+			<c:if test="${!esp}">
 			<td>
 				<a href="ExcluirQuestao?id=${p.idQuestao }">Excluir</a>
 			</td>

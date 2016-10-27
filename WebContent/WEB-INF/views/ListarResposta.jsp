@@ -84,6 +84,6 @@
 		</tr>
 	</c:forEach>
 </table>
-<a href="index.jsp"><input type="submit" value="concluido >>>"></a>
+<a href="prof"><input type="submit" value="concluido >>>"></a>
 </body>
 </html>

@@ -43,6 +43,7 @@ public class UsuarioController {
 		}
 		if (esp != null) {
 			session.setAttribute("usuarioLogado", esp);
+			session.setAttribute("esp", true);
 			return "esp";
 		}
 		if (prof != null) {

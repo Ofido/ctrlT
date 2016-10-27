@@ -201,7 +201,6 @@ public class AlunoDAO implements InterfaceAlunoDAO {
 
 	@Override
 	public Aluno logar(String email, String senha) {
-		System.out.println(email + "     " + senha);
 		if (email == null) {
 			return null;
 		}

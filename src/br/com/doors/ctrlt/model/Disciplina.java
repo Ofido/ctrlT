@@ -3,6 +3,7 @@ package br.com.doors.ctrlt.model;
 public class Disciplina {
 	private Long idDisciplina;
 	private String nomeDisciplina;
+	private Boolean validadaDisciplina;
 	
 	public Long getIdDisciplina() {
 		return idDisciplina;
@@ -20,6 +21,12 @@ public class Disciplina {
 	public String toString() {
 		return "Disciplina [idDisciplina=" + idDisciplina + ", nomeDisciplina="
 				+ nomeDisciplina + "]";
+	}
+	public Boolean getValidadaDisciplina() {
+		return validadaDisciplina;
+	}
+	public void setValidadaDisciplina(Boolean validadaDisciplina) {
+		this.validadaDisciplina = validadaDisciplina;
 	}
 	
 }

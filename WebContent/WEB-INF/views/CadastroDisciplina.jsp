@@ -9,7 +9,11 @@
 </head>
 <body>
 <form action="CadastroDisciplina" method="get">
-<input type="hidden" name="idDisciplina" value="${alterando.idDisciplina }">
+<input type="hidden" name="idDisciplina" value="${alterando.idDisciplina }">validadaDisciplina
+<c:if test="${esp }">
+<input type="radio" name="validadaDisciplina" value="true">validar
+</c:if>
+<input <c:if test="${!esp }"> type="hidden" </c:if> <c:if test="${esp }"> type="radio" </c:if> name="validadaDisciplina" value="true">validar
 <label for="nomeDisciplina">nomeDisciplina</label>
 <input type="text" name="nomeDisciplina" value="${alterando.nomeDisciplina }"></br></br>
 <input type="submit" value="Cadastro">

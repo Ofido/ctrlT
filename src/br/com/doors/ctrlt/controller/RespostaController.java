@@ -64,7 +64,7 @@ public class RespostaController {
 				}
 			respostaDAO.alterar(resposta, idQuestao);
 		}else if (resposta.getCorretaResposta() == null) {
-			String[] respostas = resposta.getResposta().trim().split(",");
+			String[] respostas = resposta.getResposta().trim().split(",");//TODO MUDAR O SPLIT
 			for (int i = 0; i < respostas.length; i++) {
 				Resposta a = new Resposta();
 				a.setCorretaResposta((questaoDAO.procurar(idQuestao).getTipoQuestao().equals(TipoQuestao.UNICA) && i==0));

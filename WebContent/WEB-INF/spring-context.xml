@@ -20,10 +20,9 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- <mvc:interceptors>
+	<mvc:interceptors>
 		<bean class="br.com.doors.ctrlt.interceptor.AutorizaLogin" />
 	</mvc:interceptors>
- 	-->
  	
 	<bean id="mysqlDataSource" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>

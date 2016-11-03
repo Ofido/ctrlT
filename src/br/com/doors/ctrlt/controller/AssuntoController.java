@@ -48,6 +48,9 @@ public class AssuntoController {
 	@RequestMapping("ListandoAssunto")
 	private String listar(Model session) {
 		session.addAttribute("lista", assuntoDAO.listarTodos());
+		for (Assunto a : assuntoDAO.listarTodos()) {
+			System.out.println(a.getIdAssunto()+"\n"+a.getDisciplinaAssunto().getIdDisciplina()+"\n"+a.getNomeAssunto()+"\n"+"\n");
+		}
 		return "ListarAssunto";
 	}
 	

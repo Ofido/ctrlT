@@ -32,13 +32,13 @@ public class UsuarioController {
 	
 	@RequestMapping("efetuaLogin")
 	public String efetuaLogin(String email, String senha, HttpSession session) {
-		System.out.println(email + "     " + senha);
 		Administrador adm = admDAO.logar(email, senha);
 		Especialista esp = espDAO.logar(email, senha);
 		Professor prof = profDAO.logar(email, senha);
 		Aluno aluno = alunoDAO.logar(email, senha);
 		if (adm != null) {
 			session.setAttribute("usuarioLogado", adm);
+			session.setAttribute("esp", false);
 			return "adm";
 		}
 		if (esp != null) {
@@ -48,10 +48,12 @@ public class UsuarioController {
 		}
 		if (prof != null) {
 			session.setAttribute("usuarioLogado", prof);
+			session.setAttribute("esp", false);
 			return "prof";
 		}
 		if (aluno != null) {
 			session.setAttribute("usuarioLogado", aluno);
+			session.setAttribute("esp", false);
 			return "aluno";
 		}
 		return "falha";

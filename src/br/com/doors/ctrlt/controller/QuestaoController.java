@@ -105,7 +105,7 @@ public class QuestaoController {
 		calendar.set(0, 0, 0, 0, tempo);
 		questao.setTempoQuestao(calendar);
 		Calendar aqui = Calendar.getInstance();
-		aqui.set(1995, 11, 20, 15, 55, 55);	
+		aqui.set(0, 0, 0, 0, 0, 1);	
 		questao.setUltimoUsoQuestao(aqui);
 		if (!arquivo.isEmpty()) {
 			try {

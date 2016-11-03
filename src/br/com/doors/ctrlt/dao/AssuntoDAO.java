@@ -20,7 +20,7 @@ public class AssuntoDAO implements InterfaceAssuntoDAO {
 	private static final String INCLUIR = "insert into ctrlt.assunto(idDisciplina, nomeAssunto) value (?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.assunto where idAssunto=?";
 	private static final String ALTERAR = "update ctrlt.assunto set idDisciplina=?, nomeAssunto=? where idAssunto=?";
-	private static final String LISTAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina";
+	private static final String LISTAR = "select * from ctrlt.assunto, ctrlt.disciplina where disciplina.idDisciplina = assunto.idDisciplina order by assunto.idAssunto";
 	private static final String PROCURAR = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina and idassunto=?";
 	private static final String PROCURAR_DISCIPLINA = "select * from ctrlt.assunto, ctrlt.disciplina where assunto.idDisciplina = disciplina.idDisciplina and disciplina.idDisciplina=?";
 

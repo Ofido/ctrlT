@@ -28,7 +28,7 @@
 	</form>
 	<div style="border: aqua solid;">
 	<h1>Professor</h1>
-	<p>
+	<p> 
 		<a href="CadastrandoProfessor"> auto cadastro prof </a>
 	</p>
 	<p>

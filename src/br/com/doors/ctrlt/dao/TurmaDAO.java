@@ -16,11 +16,11 @@ import br.com.doors.ctrlt.model.Turma;
 
 @Repository
 public class TurmaDAO implements InterfaceTurmaDAO {
-	private static final String INCLUIR = "insert into ctrlt.disciplina(nomeDisciplina) value (?)";
-	private static final String EXCLUIR = "delete from ctrlt.disciplina where idDisciplina=?";
-	private static final String ALTERAR = "update ctrlt.disciplina set nomeDisciplina=? where idDisciplina=?";
-	private static final String LISTAR = "select * from ctrlt.disciplina";
-	private static final String PROCURAR = "select * from ctrlt.disciplina where idDisciplina=?";
+	private static final String INCLUIR = "insert into ctrlt.turma(nomeTurma, idProfessor) value (?,?)";
+	private static final String EXCLUIR = "delete from ctrlt.turma where idTurma=?";
+	private static final String ALTERAR = "update ctrlt.turma set nomeTurma=?, idProfessor=? where idTurma=?";
+	private static final String LISTAR = "select * from ctrlt.turma, ctrl.professor where ctrlt.turma.idProfessor = ctrl.professor.idProfessor";
+	private static final String PROCURAR = "select * from ctrlt.turma where idTurma=?";
 	
 	//CONEXÃO
 	private static Connection CONEXAO;
@@ -55,7 +55,7 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 	}
 
 	@Override
-	public void alterar(Turma t) {
+	public void alterar(Turma t) {		
 		if (t==null) {
 			throw new RuntimeException("DISCIPLINA NÃO PODE SER NULA" + this.getClass());
 		}
@@ -95,18 +95,18 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 
 	@Override
 	public List<Turma> listarTodos() {
-		List<Turma> disciplinas = new ArrayList<>();
+		List<Turma> turmas = new ArrayList<>();
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(LISTAR);
 			
 			ResultSet rs = stmt.executeQuery();
 			
-			Turma disciplina;
+			Turma turma;
 			
 			while (rs.next()) {
-				disciplina = new Turma();
-				disciplina.setIdTurma(rs.getLong("idTurma"));
-				disciplinas.add(disciplina);
+				turma = new Turma();
+				turma.setIdTurma(rs.getLong("idTurma"));
+				turmas.add(turma);
 			}
 			
 			rs.close();
@@ -114,12 +114,12 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException("ERRO NA ALTERACAO DE DISCIPLINA" + this.getClass() + e.toString());
 		}
-		return disciplinas;
+		return turmas;
 	}
 
 	@Override
 	public Turma procurar(Long id) {
-		Turma disciplina = null;
+		Turma turma = null;
 		try {
 			PreparedStatement stmt = CONEXAO.prepareStatement(PROCURAR);
 			
@@ -128,8 +128,8 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 			ResultSet rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				disciplina = new Turma();
-				disciplina.setIdTurma(rs.getLong("idTurma"));
+				turma = new Turma();
+				turma.setIdTurma(rs.getLong("idTurma"));
 				
 			}
 			
@@ -138,7 +138,7 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException("ERRO NA ALTERACAO DE DISCIPLINA" + this.getClass() + e.toString());
 		}
-		return disciplina;
+		return turma;
 	}
 
 }

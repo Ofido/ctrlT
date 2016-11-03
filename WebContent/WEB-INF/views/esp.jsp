@@ -19,7 +19,7 @@
 		<a href="CadastrandoAssunto"> cadastro</a>
 	</p>
 	<p>
-		<a href="ListandoQuestao"> listar </a>
+		<a href="ListandoAssunto"> listar </a>
 	</p>
 	<p>
 		<a href="ValidandoAssunto"> validar </a>
@@ -28,7 +28,7 @@
 	<div style="border: aqua solid;">
 	<h1>Questao</h1>
 	<p>
-		<a href="ValidandoQuestao"> validar </a>
+		<a href="ListandoQuestao"> validar </a>
 	</p>
 	</div> 
 </body>

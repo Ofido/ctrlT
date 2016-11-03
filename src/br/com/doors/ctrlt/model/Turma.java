@@ -8,6 +8,7 @@ public class Turma {
 	private Professor regenteTurma;
 	private List<Professor> professoresTurma;
 	private String nomeTurma;
+	
 	public Long getIdTurma() {
 		return idTurma;
 	}

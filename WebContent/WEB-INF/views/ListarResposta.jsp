@@ -19,7 +19,7 @@
 	<table border="2" bordercolor="RED">
 		<tr>
 			<th>ID</th>
-			<c:if test="${tipoQuestao != 'DISSERTATIVA')">
+			<c:if test="!${tipoQuestao == 'DISSERTATIVA'}">
 				<th>CORRETA</th> 
 			</c:if>
 			<th>RESPOSTA</th>
@@ -31,7 +31,7 @@
 		<c:forEach items="${lista }" var="p">
 			<tr>
 				<td>${p.idResposta }</td>
-				<c:if test="${tipoQuestao != 'DISSERTATIVA')">
+				<c:if test="!${tipoQuestao == 'DISSERTATIVA'}">
 					<td><c:if test="${tipoQuestao == 'MULTIPLA'}">
 							<form action="CadastroResposta" enctype="multipart/form-data"
 								method="post">
@@ -44,7 +44,7 @@
 								<input type="submit" id="a${p.idResposta }"
 									style="display: none;">
 							</form>
-						</c:if> <c:if test="${tipoQuestao == 'VERDADEIROFALSO')">	
+						</c:if> <c:if test="${tipoQuestao == 'VERDADEIROFALSO'}">	
 							<form action="CadastroResposta" enctype="multipart/form-data"
 								method="post">
 								<input type="hidden" name="idQuestao" value="${questao }">
@@ -56,7 +56,7 @@
 								<input type="submit" id="a${p.idResposta }"
 									style="display: none;">
 							</form>
-						</c:if> <c:if test="${tipoQuestao == 'UNICA')">
+						</c:if> <c:if test="${tipoQuestao == 'UNICA'}">
 				${p.corretaResposta}
 			</c:if></td>
 				</c:if>

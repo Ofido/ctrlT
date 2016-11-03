@@ -49,7 +49,7 @@ public class AlunoDAO implements InterfaceAlunoDAO {
 			stmt.setLong(3, t.getAniversarioAluno().getTimeInMillis());
 			stmt.setString(4, t.getCpfAluno());
 			stmt.setString(5, t.getNomeAluno());
-			stmt.setString(6, t.getComplementoAluno());
+			stmt.setString(6, t.getComplementoAluno());//TODO MUITO PEQUENO
 			stmt.setString(7, t.getRuaAluno());
 			stmt.setString(8, t.getBairroAluno());
 			stmt.setString(9, t.getNumeroAluno());

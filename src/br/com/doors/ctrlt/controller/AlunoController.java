@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import br.com.doors.ctrlt.dao.AlunoDAO;
+import br.com.doors.ctrlt.dao.TurmaDAO;
 import br.com.doors.ctrlt.model.Aluno;
 
 @Controller
 public class AlunoController {
 	private final AlunoDAO alunoDAO;
+	private final TurmaDAO turmaDAO;
 	
 	@Autowired
-	public AlunoController(AlunoDAO daoS){
+	public AlunoController(AlunoDAO daoS, TurmaDAO turmaDAO){
 		this.alunoDAO = daoS;
+		this.turmaDAO = turmaDAO;
 	}
 	
 	@RequestMapping("CadastrandoAluno")
@@ -41,7 +44,7 @@ public class AlunoController {
 	}
 	
 	@RequestMapping("CadastroAluno")
-	public String cadastro(Aluno aluno, MultipartFile ft, String aniversario) {
+	public String cadastro(Aluno aluno, MultipartFile ft, String aniversario, Long idTurma) {
 		Calendar calendar = Calendar.getInstance();
 		String[] strings = aniversario.split("-");
 		calendar.set(Integer.parseInt(strings[0]), Integer.parseInt(strings[1]), Integer.parseInt(strings[2]));
@@ -55,6 +58,7 @@ public class AlunoController {
 		}
 		if (aluno.getIdAluno() == null) {			
 			alunoDAO.incluir(aluno);
+			
 		}else {
 			alunoDAO.alterar(aluno);
 		}

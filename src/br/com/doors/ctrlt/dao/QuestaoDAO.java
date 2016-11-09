@@ -272,5 +272,28 @@ public class QuestaoDAO implements InterfaceQuestaoDAO {
 		}
 		return questaos;
 	}
+	
+	public List<Questao> professorQuestoes() {
+		List<Questao> questoes = new ArrayList<Questao>();//TODO AQUI
+		return questoes;
+	}
+	public List<Questao> analistaQuestoes() {
+		List<Questao> questoes = new ArrayList<Questao>();
+		return questoes;
+	}
+	public Boolean professorArrumarQuestoes() {
+		if (professorQuestoes().isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	public Boolean analistaValidarQuestoes() {
+		if (analistaQuestoes().isEmpty()) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 
 }

@@ -27,7 +27,7 @@
 	</div>
 	<div style="border: aqua solid;">
 	<h1>Prova</h1>
-	</div>
+	</div>	
 	<div style="border: aqua solid;">
 	<h1>Estatistica</h1>
 	</div>

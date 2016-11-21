@@ -25,10 +25,12 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 	private static final String INCLUIRPROFESSOR = "insert into ctrlt.pertence_professor_turma(idTurma, idProfessor) value (?,?)";
 	private static final String EXCLUIR = "delete from ctrlt.turma where idTurma=?";
 	private static final String ALTERAR = "update ctrlt.turma set nomeTurma=?, idProfessor=? where idTurma=?";
-	private static final String LISTAR = "select * from ctrlt.turma, ctrlt.professor where ctrlt.turma.idProfessor = ctrl.professor.idProfessor";
-	private static final String LISTARPROEFSSORES = "select * from ctrlt.turma, ctrlt.pertence_professor_turma, ctrl.professor where ctrlt.turma.idTurma = ctrl.pertence_professor_turma.idTurma AND ctrlt.pertence_professor_turma.idProfessor = ctrl.professor.idProfessor";
-	private static final String LISTARALUNOS = "select * from ctrlt.turma, ctrlt.pertence_aluno_turma, ctrlt.aluno where ctrlt.turma.idTurma = ctrl.pertence_aluno_turma.idTurma AND ctrl.pertence_aluno_turma.idAluno = ctrl.aluno.idAluno";
+	private static final String LISTAR = "select * from ctrlt.turma, ctrlt.professor where ctrlt.turma.idProfessor = ctrl.professor.idProfessor AND ctrl.professor.idProfessor = ?";
+	private static final String LISTARPROEFSSORES = "select * from ctrlt.turma, ctrlt.pertence_professor_turma, ctrl.professor where ctrlt.turma.idTurma = ctrl.pertence_professor_turma.idTurma AND ctrlt.pertence_professor_turma.idProfessor = ctrl.professor.idProfessor AND ctrlt.turma.idTurma=?";
+	private static final String LISTARALUNOS = "select * from ctrlt.turma, ctrlt.pertence_aluno_turma, ctrlt.aluno where ctrlt.turma.idTurma = ctrl.pertence_aluno_turma.idTurma AND ctrl.pertence_aluno_turma.idAluno = ctrl.aluno.idAluno AND ctrlt.turma.idTurma=?";
 	private static final String PROCURAR = "select * from ctrlt.turma where idTurma=?";
+	private static final String LISTARTURMAPROEFSSORES = "select * from ctrlt.turma, ctrlt.pertence_professor_turma where ctrlt.turma.idTurma = ctrl.pertence_professor_turma.idTurma AND ctrlt.pertence_professor_turma.idProfessor = ?";
+	private static final String LISTARTURMAALUNOS = "select * from ctrlt.turma, ctrlt.pertence_aluno_turma where ctrlt.turma.idTurma = ctrl.pertence_aluno_turma.idTurma AND ctrl.pertence_aluno_turma.idAluno = ?";
 	
 	//CONEXÃO
 	private static Connection CONEXAO;
@@ -63,8 +65,30 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 		}
 	}
 	
-	public void incluirNaTurma(Object t) {
-		//TODO
+	@Override
+	public void incluirNaTurma(Object o, Turma t) {
+		Long id = null;
+		String prepareStatement = null;
+		if (o == null) {
+			new RuntimeException(this.getClass() + "   ERRO NO  incluirNaTurma, NULL  ");
+		} else if (o.getClass() == Professor.class) {
+			id = ((Professor)o).getIdProfessor();
+			prepareStatement = INCLUIRPROFESSOR;
+		}else if (o.getClass() == Aluno.class) {
+			id = ((Aluno)o).getIdAluno();
+			prepareStatement = INCLUIRALUNO;
+		}else {
+			new RuntimeException(this.getClass() + "   ERRO NO  incluirNaTurma, NEM ALUNO NEM PROF  ");
+		}
+		try {
+			PreparedStatement stmt = CONEXAO.prepareStatement(prepareStatement);
+			stmt.setLong(1, t.getIdTurma());
+			stmt.setLong(2, id);
+			stmt.execute();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("ERRO NO ADD DE TURMA" + this.getClass() + e.toString());
+		}
 	}
 
 	@Override
@@ -99,7 +123,45 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 		}
 	}
 
-
+	public List<Turma> listarTodos(Long id) {
+		List<Turma> turmas = new ArrayList<>();
+		try {
+			PreparedStatement stmt = CONEXAO.prepareStatement(LISTAR);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			Turma turma;
+			
+			while (rs.next()) {
+				turma = new Turma();
+				turma.setIdTurma(rs.getLong("idTurma"));
+				turma.setNomeTurma(rs.getString("nomeTurma"));
+				Professor professor = new Professor();
+				professor.setIdProfessor(rs.getLong("idprofessor"));
+				professor.setNomeProfessor(rs.getString("nomeprofessor"));
+				professor.setEmailProfessor(rs.getString("emailprofessor"));
+				professor.setSenhaProfessor(rs.getString("senhaprofessor"));
+				professor.setCpfProfessor(rs.getString("cpfProfessor"));
+				professor.setLicenca((rs.getInt("licencaProfessor")==1?true:false));
+				professor.setEscolaProfessor(rs.getString("escolaProfessor"));
+				professor.setTagProfessor(rs.getString("tagProfessor"));
+				professor.setTelefoneProfessor(rs.getString("telefoneProfessor"));
+				professor.setFotoProfessor(rs.getBytes("fotoProfessor"));
+				turma.setRegenteTurma(professor);
+				turma.setProfessoresTurma(listarProfTurma(turma));
+				turma.setAlunosTurma(listarAlunoTurma(turma));
+				turmas.add(turma);
+			}
+			
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("ERRO NA ALTERACAO DE TURMA" + this.getClass() + e.toString());
+		}
+		return turmas;
+	}
+	
+	@Deprecated
 	@Override
 	public List<Turma> listarTodos() {
 		List<Turma> turmas = new ArrayList<>();
@@ -243,6 +305,56 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 			throw new RuntimeException("ERRO NO LISTAR DE ALUNO" + this.getClass() + e.toString());
 		}
 	}
+
+	@Override
+	public List<Turma> listarTurmaAluno(Long id) {
+		List<Turma> turmas = new ArrayList<>();
+		try {
+			PreparedStatement stmt = CONEXAO.prepareStatement(LISTARTURMAALUNOS);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			Turma turma;
+			
+			while (rs.next()) {
+				turma = new Turma();
+				turma.setIdTurma(rs.getLong("idTurma"));
+				turma.setNomeTurma(rs.getString("nomeTurma"));
+				turmas.add(turma);
+			}
+			
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("ERRO NA ALTERACAO DE TURMA" + this.getClass() + e.toString());
+		}
+		return turmas;
+	}
+
+	@Override
+	public List<Turma> listarTurmaProf(Long id) {
+		List<Turma> turmas = new ArrayList<>();
+		try {
+			PreparedStatement stmt = CONEXAO.prepareStatement(LISTARTURMAPROEFSSORES);
+			stmt.setLong(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			Turma turma;
+			
+			while (rs.next()) {
+				turma = new Turma();
+				turma.setIdTurma(rs.getLong("idTurma"));
+				turma.setNomeTurma(rs.getString("nomeTurma"));
+				turmas.add(turma);
+			}
+			
+			rs.close();
+			stmt.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("ERRO NA ALTERACAO DE TURMA" + this.getClass() + e.toString());
+		}
+		return turmas;
+	}
 	
 	@Override
 	public List<Professor> listarProfTurma(Turma turma) {
@@ -266,5 +378,21 @@ public class TurmaDAO implements InterfaceTurmaDAO {
 			throw new RuntimeException("TURMA NÃO PODE SER NULA" + this.getClass());
 		}
 		excluir(t.getIdTurma());
+	}
+
+	@Override
+	public List<Turma> listarTurmaProf(Professor prof) {
+		if (prof==null) {
+			throw new RuntimeException("PROF NÃO PODE SER NULL" + this.getClass());
+		}
+		return listarTurmaProf(prof.getIdProfessor());
+	}
+
+	@Override
+	public List<Turma> listarTurmaAluno(Aluno aluno) {
+		if (aluno==null) {
+			throw new RuntimeException("ALUNO NÃO PODE SER NULL" + this.getClass());
+		}
+		return listarTurmaProf(aluno.getIdAluno());
 	}
 }

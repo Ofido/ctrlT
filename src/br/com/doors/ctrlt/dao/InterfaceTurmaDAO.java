@@ -11,5 +11,9 @@ public interface InterfaceTurmaDAO extends InterfaceManter<Turma>{
 	public List<Professor> listarProfTurma(Turma turma);
 	public List<Aluno> listarAlunoTurma(Long id);
 	public List<Aluno> listarAlunoTurma(Turma turma);
-	public void incluirNaTurma(Object t);
+	public void incluirNaTurma(Object o, Turma t);
+	public List<Turma> listarTurmaProf(Long id);
+	public List<Turma> listarTurmaProf(Professor prof);
+	public List<Turma> listarTurmaAluno(Long id);
+	public List<Turma> listarTurmaAluno(Aluno aluno);
 }

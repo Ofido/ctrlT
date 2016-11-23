@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.doors.ctrlt.model.Resposta;
-import br.com.doors.ctrlt.model.Resposta;
 
 @Repository
 public class RespostaDAO implements InterfaceRespostaDAO {

@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import br.com.doors.ctrlt.model.Aluno;
-import br.com.doors.ctrlt.model.Especialista;
 import br.com.doors.ctrlt.model.Professor;
 import br.com.doors.ctrlt.model.Turma;
 
